@@ -51,11 +51,9 @@
      background-color: #E9ECEF; /* Set the background color of the input field */
      border:  1px solid rgba(0,0,0,.15);  /* Optional: Remove border for a clean look */
     
-     padding :1px;
-  /*  //   padding: 8px;  *//* Adjust padding as needed for better visual appearance */
-  width: 300px; /* Set the width to your desired size */
- /* Include padding and border in the element's total width */
-  font-size: 16px;
+     padding :1px 5px 1px 5px;
+     width:200px;
+  
      
     }
 
@@ -139,7 +137,11 @@
 												id="BaleMark" name="BaleMark" type="text" required
 												readonly="readonly">
 										</div>
-
+                                             <div class="col-sm-4 form-group">
+											<label> Settlement Id</label> <input
+												class="form-control taxtbox" name="SettlementId"
+												id="SettlementId" type="text" required readonly="readonly">
+										</div>
 									
 
 									</div>
@@ -318,12 +320,7 @@
 												placeholder="Enter Date of Inspection" required>
 										</div>
 
-										<div class="col-sm-4 form-group">
-											<label> Settlement Id</label> <input
-												class="form-control taxtbox" name="SettlementId"
-												id="SettlementId" type="text" required readonly="readonly">
-										</div>
-
+										
 
 									</div>
 
