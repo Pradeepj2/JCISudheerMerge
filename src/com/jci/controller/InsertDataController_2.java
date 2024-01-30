@@ -43,42 +43,37 @@ import com.jci.model.EntryofpcsoModel;
 
 @Controller
 public class InsertDataController_2 {
-	
+
 	@Autowired
 	private PaymentInstrumentService paymentinstrumentservice;
-	
+
 	@Autowired
 	private HoDispatchService hodispatchservice;
-	
+
 	@Autowired
 	EntryofsaleService entryofsaleservice;
 
 	@Autowired
 	UploadRecieptService uploadrecieptservice;
-	
+
 	@Autowired
 	UserRoleService userroleService;
-	
+
 	@Autowired
 	UserActionService useractionservice;
-	
+
 	@Autowired
 	UserPriviligeService userpriviligeservice;
-	
-	
-	
+
 	@Autowired
 	labelGenerationService labelgenerationService;
-	
+
 	@Autowired
 	DailyPurchaseModelConfService dailyPurchaseModelConfService;
-	
-	 @Autowired
-	 RawJuteProcurementAndPaymentService rawJuteProcurAndPayService;
-	
-	
-    
-	  
+
+	@Autowired
+	RawJuteProcurementAndPaymentService rawJuteProcurAndPayService;
+
 	/*
 	 * @RequestMapping("savepcsoentry") public ModelAndView
 	 * saveUserMid(HttpServletRequest request, RedirectAttributes
@@ -106,26 +101,24 @@ public class InsertDataController_2 {
 	 * ModelAndView(new RedirectView("entryofpcso.obj")); }
 	 */
 
-	  
-	 
 	@RequestMapping("userprivilige")
-	public ModelAndView userpriviligeModel(HttpServletRequest request)
-	{	String username =(String)request.getSession().getAttribute("usrname");
+	public ModelAndView userpriviligeModel(HttpServletRequest request) {
+		String username = (String) request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("userprivilige");
-		 final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
-		 mv.addObject("userroleList", (Object)alluserroleList);
-		 final List<UserActionModel> alluseractionlist = (List<UserActionModel>)this.useractionservice.getAll();
-		 mv.addObject("useractionlist", (Object)alluseractionlist);
-		 if(username == null) {
-		     	mv = new ModelAndView("index");
-		         }
-		 return mv;
+		final List<UserRoleModel> alluserroleList = (List<UserRoleModel>) this.userroleService.getAll();
+		mv.addObject("userroleList", (Object) alluserroleList);
+		final List<UserActionModel> alluseractionlist = (List<UserActionModel>) this.useractionservice.getAll();
+		mv.addObject("useractionlist", (Object) alluseractionlist);
+		if (username == null) {
+			mv = new ModelAndView("index");
+		}
+		return mv;
 	}
-	
-	@RequestMapping("saveuserprivilige")  
-	
-	public ModelAndView saveuserprivilige(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{			String username =(String)request.getSession().getAttribute("usrname");
+
+	@RequestMapping("saveuserprivilige")
+
+	public ModelAndView saveuserprivilige(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		String username = (String) request.getSession().getAttribute("usrname");
 		try {
 			String userrole = request.getParameter("userrole");
 			String useraction = request.getParameter("action");
@@ -138,101 +131,95 @@ public class InsertDataController_2 {
 			userprivilige.setCreated_date(formattedDate1);
 			this.userpriviligeservice.create(userprivilige);
 			redirectAttributes.addFlashAttribute("msg",
-						"<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"
-								+ "");
-	
-		} catch (Exception e)
-		{
-			//System.out.println("++++++++++++++"+e);
+					"<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n" + "");
+
+		} catch (Exception e) {
+			// System.out.println("++++++++++++++"+e);
 			e.printStackTrace();
 		}
-		if(username == null) {
-	     	return new ModelAndView("index");
-	         }
+		if (username == null) {
+			return new ModelAndView("index");
+		}
 		return new ModelAndView(new RedirectView("userprivilige.obj"));
 	}
-	
-	@RequestMapping("userrole")
-	public ModelAndView userroleModel(HttpServletRequest request)
-	{   String username =(String)request.getSession().getAttribute("usrname");
-		ModelAndView mv = new ModelAndView("userrole");
-		if(username == null) {
-	     	mv = new ModelAndView("index");
-	         }
-		return mv;
-	}
-	
-	@RequestMapping("viewuserrole")
-	public ModelAndView viewuserroleModel(HttpServletRequest request)
-	{
-		String username =(String)request.getSession().getAttribute("usrname");
-		ModelAndView mv = new ModelAndView("viewuserrole");
-		 final List<UserRoleModel> alluserroleList = (List<UserRoleModel>)this.userroleService.getAll();
-		 mv.addObject("userroleList", (Object)alluserroleList);
-		 if(username == null) {
-		     	mv = new ModelAndView("index");
-		         }
-		return mv;
-	}
-	
-	 
-    @RequestMapping("saveuserrole")  
- public ModelAndView saveuserrole(HttpServletRequest request, RedirectAttributes redirectAttributes)
- {             String username =(String)request.getSession().getAttribute("usrname");
-        try {
-               String usertype = request.getParameter("usertype");
-               String rolename = request.getParameter("rolename");
-               String roletype = request.getParameter("roletype");
-               UserRoleModel userrole = new UserRoleModel();               
-               userrole.setRole_name(rolename);
-               userrole.setUser_type(usertype);
-               userrole.setRole_type(roletype);
-               Date d2 = new Date();
-               SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
-               String formattedDate1 = dd.format(d2);
-               userrole.setCreated_date(formattedDate1);                   
-               this.userroleService.create(userrole);        
-               redirectAttributes.addFlashAttribute("msg",
-                                   "<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"+ "");
-        } catch (Exception e)
-        {
-               System.out.println("++++++++++++++"+e);
-               e.printStackTrace();
-        }
-        if(username == null) {
-        return new ModelAndView("index");
-          }
-        return new ModelAndView(new RedirectView("viewuserrole.obj"));
- }
 
-	 @ResponseBody
-	    @RequestMapping(value = { "validateRole" }, method = { RequestMethod.GET })
-	    public String validateRole(final HttpServletRequest request) {
-		 String username =(String)request.getSession().getAttribute("usrname");
-	        final Gson gson = new Gson();
-	        return this.userroleService.validateRole(request.getParameter("rolename")) + "";
-	    }
-	    
-	
-	@RequestMapping("useraction")
-	public ModelAndView useractionModel(HttpServletRequest request)
-	{		String username =(String)request.getSession().getAttribute("usrname");
-		ModelAndView mv = new ModelAndView("useraction");
-		if(username == null) {
-	     	mv = new ModelAndView("index");
-	         }
+	@RequestMapping("userrole")
+	public ModelAndView userroleModel(HttpServletRequest request) {
+		String username = (String) request.getSession().getAttribute("usrname");
+		ModelAndView mv = new ModelAndView("userrole");
+		if (username == null) {
+			mv = new ModelAndView("index");
+		}
 		return mv;
 	}
-	
-	@RequestMapping("saveuseraction")  
-	public ModelAndView saveuseraction(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{		String username =(String)request.getSession().getAttribute("usrname");
+
+	@RequestMapping("viewuserrole")
+	public ModelAndView viewuserroleModel(HttpServletRequest request) {
+		String username = (String) request.getSession().getAttribute("usrname");
+		ModelAndView mv = new ModelAndView("viewuserrole");
+		final List<UserRoleModel> alluserroleList = (List<UserRoleModel>) this.userroleService.getAll();
+		mv.addObject("userroleList", (Object) alluserroleList);
+		if (username == null) {
+			mv = new ModelAndView("index");
+		}
+		return mv;
+	}
+
+	@RequestMapping("saveuserrole")
+	public ModelAndView saveuserrole(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		String username = (String) request.getSession().getAttribute("usrname");
+		try {
+			String usertype = request.getParameter("usertype");
+			String rolename = request.getParameter("rolename");
+			String roletype = request.getParameter("roletype");
+			UserRoleModel userrole = new UserRoleModel();
+			userrole.setRole_name(rolename);
+			userrole.setUser_type(usertype);
+			userrole.setRole_type(roletype);
+			Date d2 = new Date();
+			SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
+			String formattedDate1 = dd.format(d2);
+			userrole.setCreated_date(formattedDate1);
+			this.userroleService.create(userrole);
+			redirectAttributes.addFlashAttribute("msg",
+					"<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n" + "");
+		} catch (Exception e) {
+			System.out.println("++++++++++++++" + e);
+			e.printStackTrace();
+		}
+		if (username == null) {
+			return new ModelAndView("index");
+		}
+		return new ModelAndView(new RedirectView("viewuserrole.obj"));
+	}
+
+	@ResponseBody
+	@RequestMapping(value = { "validateRole" }, method = { RequestMethod.GET })
+	public String validateRole(final HttpServletRequest request) {
+		String username = (String) request.getSession().getAttribute("usrname");
+		final Gson gson = new Gson();
+		return this.userroleService.validateRole(request.getParameter("rolename")) + "";
+	}
+
+	@RequestMapping("useraction")
+	public ModelAndView useractionModel(HttpServletRequest request) {
+		String username = (String) request.getSession().getAttribute("usrname");
+		ModelAndView mv = new ModelAndView("useraction");
+		if (username == null) {
+			mv = new ModelAndView("index");
+		}
+		return mv;
+	}
+
+	@RequestMapping("saveuseraction")
+	public ModelAndView saveuseraction(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		String username = (String) request.getSession().getAttribute("usrname");
 		try {
 			String actionname = request.getParameter("actionname");
 			String actionstatus = request.getParameter("actionstatus");
-			
+
 			UserActionModel useraction = new UserActionModel();
-			
+
 			useraction.setAction_name(actionname);
 			useraction.setAction_status(actionstatus);
 			Date d2 = new Date();
@@ -241,37 +228,33 @@ public class InsertDataController_2 {
 			useraction.setCreated_date(formattedDate1);
 			this.useractionservice.create(useraction);
 			redirectAttributes.addFlashAttribute("msg",
-						"<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n"
-								+ "");
-	
-		} catch (Exception e)
-		{
-			System.out.println("++++++++++++++"+e);
+					"<div class=\"alert alert-success\"><b>Success !</b> Record created successfully.</div>\r\n" + "");
+
+		} catch (Exception e) {
+			System.out.println("++++++++++++++" + e);
 			e.printStackTrace();
 		}
-		if(username == null) {
-	     	return new ModelAndView("index");
-	         }
+		if (username == null) {
+			return new ModelAndView("index");
+		}
 		return new ModelAndView(new RedirectView("useraction.obj"));
 	}
-	
-	
+
 	@RequestMapping("entryofpayment")
-	public ModelAndView EntryofpiModel(HttpServletRequest request)
-	{	String username =(String)request.getSession().getAttribute("usrname");
+	public ModelAndView EntryofpiModel(HttpServletRequest request) {
+		String username = (String) request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("entryofpaymentinstrument");
-		if(username == null) {
-	     	mv = new ModelAndView("index");
-	         }
+		if (username == null) {
+			mv = new ModelAndView("index");
+		}
 		return mv;
 	}
-	
-	
-	@RequestMapping("saveentryofpaymentinstrument")  
-	public ModelAndView saveentryofPI(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{		String username =(String)request.getSession().getAttribute("usrname");
+
+	@RequestMapping("saveentryofpaymentinstrument")
+	public ModelAndView saveentryofPI(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		String username = (String) request.getSession().getAttribute("usrname");
 		try {
-		
+
 			String fullcontractno = request.getParameter("fullcontractno");
 			String contractdate = request.getParameter("contractdate");
 			String cropyear = request.getParameter("cropyear");
@@ -290,12 +273,11 @@ public class InsertDataController_2 {
 			String autorevolvingamount = request.getParameter("autorevolvingamount");
 			String dateofship = request.getParameter("dateofship");
 			String dateofexpiry = request.getParameter("dateofexpiry");
-			if(autorevolvingamount =="")
-			{
+			if (autorevolvingamount == "") {
 				autorevolvingamount = "0";
 			}
 			PaymentInstrumentModel paymentinstrument = new PaymentInstrumentModel();
-			
+
 			paymentinstrument.setFullcontractno(fullcontractno);
 			SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
 			Date contdate = formatter1.parse(contractdate);
@@ -316,61 +298,50 @@ public class InsertDataController_2 {
 			paymentinstrument.setAutorevolvingoption(autorevolvingoption);
 			paymentinstrument.setAutorevolvingamount(autorevolvingamount);
 			Date date3 = null;
-			if(dateofship =="")
-				{
-				  paymentinstrument.setDateofshipment(date3);
-				}
-			else
-				{
-				  Date dateofship1 = formatter1.parse(dateofship);
-				  paymentinstrument.setDateofshipment(dateofship1);
-				}
-			if(dateofexpiry =="")
-				{
-				  paymentinstrument.setDateofexpiry(date3);
-				}
-			else
-				{
-				  Date dateofexpiry1 = formatter1.parse(dateofexpiry);
-				  paymentinstrument.setDateofexpiry(dateofexpiry1);
-				}
-			 Date date= new Date();
-			 String currdate = date.toString();
-		     paymentinstrument.setGenerateddate(currdate);
-	
+			if (dateofship == "") {
+				paymentinstrument.setDateofshipment(date3);
+			} else {
+				Date dateofship1 = formatter1.parse(dateofship);
+				paymentinstrument.setDateofshipment(dateofship1);
+			}
+			if (dateofexpiry == "") {
+				paymentinstrument.setDateofexpiry(date3);
+			} else {
+				Date dateofexpiry1 = formatter1.parse(dateofexpiry);
+				paymentinstrument.setDateofexpiry(dateofexpiry1);
+			}
+			Date date = new Date();
+			String currdate = date.toString();
+			paymentinstrument.setGenerateddate(currdate);
+
 			this.paymentinstrumentservice.create(paymentinstrument);
 			redirectAttributes.addFlashAttribute("msg",
-						"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
-								+ "");
-	
-		} catch (Exception e) 
-		{
-			System.out.println("++++++++++++++"+e);
+					"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
+
+		} catch (Exception e) {
+			System.out.println("++++++++++++++" + e);
 			e.printStackTrace();
 		}
-		if(username == null) {
-	     	return new ModelAndView("index");
-	         }
+		if (username == null) {
+			return new ModelAndView("index");
+		}
 		return new ModelAndView(new RedirectView("entryofpayment.obj"));
 	}
-	
-	
-	@RequestMapping("HOdispatch")
-	public ModelAndView HODispatchInstructionModel(HttpServletRequest request)
-	{	String username =(String)request.getSession().getAttribute("usrname");
 
+	@RequestMapping("HOdispatch")
+	public ModelAndView HODispatchInstructionModel(HttpServletRequest request) {
+		String username = (String) request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("HOdispatchinstruction");
-		if(username == null) {
-	     	mv = new ModelAndView("index");
-	         }
+		if (username == null) {
+			mv = new ModelAndView("index");
+		}
 		return mv;
 	}
-	
-	@RequestMapping("savehodispatch")  
-	public ModelAndView hoDispatchInstruction(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{	String username =(String)request.getSession().getAttribute("usrname");
-		try 
-		{
+
+	@RequestMapping("savehodispatch")
+	public ModelAndView hoDispatchInstruction(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		String username = (String) request.getSession().getAttribute("usrname");
+		try {
 			String fullcontractno = request.getParameter("fullcontractno");
 			String contractdate = request.getParameter("contractdate");
 			String cropyear = request.getParameter("cropyear");
@@ -390,25 +361,33 @@ public class InsertDataController_2 {
 			String gprice6 = request.getParameter("gprice5");
 			String gprice7 = request.getParameter("gprice6");
 			String gprice8 = request.getParameter("gprice7");
-			if(gprice1 == null)
-			{  gprice1 = "0"; }
-			if(gprice2 == null)
-			{  gprice2 = "0"; }
-			if(gprice3 == null)
-			{  gprice3 = "0"; }
-			if(gprice4 == null)
-			{  gprice4 = "0"; }
-			if(gprice5 == null)
-			{  gprice5 = "0"; }
-			if(gprice6 == null)
-			{  gprice6 = "0"; }
-			if(gprice7 == null)
-			{  gprice7 = "0"; }
-			if(gprice8 == null)
-			{  gprice8 = "0"; }
-			
+			if (gprice1 == null) {
+				gprice1 = "0";
+			}
+			if (gprice2 == null) {
+				gprice2 = "0";
+			}
+			if (gprice3 == null) {
+				gprice3 = "0";
+			}
+			if (gprice4 == null) {
+				gprice4 = "0";
+			}
+			if (gprice5 == null) {
+				gprice5 = "0";
+			}
+			if (gprice6 == null) {
+				gprice6 = "0";
+			}
+			if (gprice7 == null) {
+				gprice7 = "0";
+			}
+			if (gprice8 == null) {
+				gprice8 = "0";
+			}
+
 			HODispatchInstructionModel hodispatch = new HODispatchInstructionModel();
-			
+
 			hodispatch.setFullcontractno(fullcontractno);
 			SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
 			Date contdate = formatter1.parse(contractdate);
@@ -433,35 +412,34 @@ public class InsertDataController_2 {
 			hodispatch.setJutegrade7(gprice7);
 			hodispatch.setJutegrade8(gprice8);
 			this.hodispatchservice.create(hodispatch);
-			redirectAttributes.addFlashAttribute("msg","<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"+ "");
-	
-		} catch (Exception e)
-		{
-			System.out.println("++++++++++++++"+e);
+			redirectAttributes.addFlashAttribute("msg",
+					"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
+
+		} catch (Exception e) {
+			System.out.println("++++++++++++++" + e);
 			e.printStackTrace();
 		}
-		if(username == null) {
-	     	return new ModelAndView("index");
-	         }
+		if (username == null) {
+			return new ModelAndView("index");
+		}
 		return new ModelAndView(new RedirectView("HOdispatchInst.obj"));
 
 	}
-	
+
 	@RequestMapping("entryofsale")
-	public ModelAndView EntryofSaleForm(HttpServletRequest request)
-	{	String username =(String)request.getSession().getAttribute("usrname");
+	public ModelAndView EntryofSaleForm(HttpServletRequest request) {
+		String username = (String) request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("entryofsale");
-		 if(username == null) {
-		     	mv = new ModelAndView("index");
-		         }
+		if (username == null) {
+			mv = new ModelAndView("index");
+		}
 		return mv;
 	}
-	
-	@RequestMapping("saveentryofsale")  
-	public ModelAndView saveEntryofsale(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{		String username =(String)request.getSession().getAttribute("usrname");
-		try 
-		{
+
+	@RequestMapping("saveentryofsale")
+	public ModelAndView saveEntryofsale(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		String username = (String) request.getSession().getAttribute("usrname");
+		try {
 			String dpc10no = request.getParameter("dpc10no");
 			String dpc10date = request.getParameter("dpc10date");
 			String millsname = request.getParameter("millsname");
@@ -479,12 +457,11 @@ public class InsertDataController_2 {
 			String jutegrade = request.getParameter("jutegrade");
 			String nominalweight = request.getParameter("nominalweight");
 			String quantity = request.getParameter("quantity");
-			String rateperquintals = request.getParameter("rateperquintals");	
-			if(lotno =="")
-			{
-				lotno ="0";
+			String rateperquintals = request.getParameter("rateperquintals");
+			if (lotno == "") {
+				lotno = "0";
 			}
-			EntryofSaleModel entryofsale = new EntryofSaleModel();	
+			EntryofSaleModel entryofsale = new EntryofSaleModel();
 			entryofsale.setDpcno(dpc10no);
 			SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
 			Date dpcdate = formatter1.parse(dpc10date);
@@ -506,37 +483,35 @@ public class InsertDataController_2 {
 			entryofsale.setNominalweight(nominalweight);
 			entryofsale.setQuantity(quantity);
 			entryofsale.setRateperquintals(rateperquintals);
-			
+
 			this.entryofsaleservice.create(entryofsale);
-			redirectAttributes.addFlashAttribute("msg","<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
-								+ "");
-	
-		} catch (Exception e)
-		{
-			System.out.println("++++++++++++++"+e);
+			redirectAttributes.addFlashAttribute("msg",
+					"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
+
+		} catch (Exception e) {
+			System.out.println("++++++++++++++" + e);
 			e.printStackTrace();
 		}
-		 if(username == null) {
-		     	return new ModelAndView("index");
-		         }
+		if (username == null) {
+			return new ModelAndView("index");
+		}
 		return new ModelAndView(new RedirectView("entryofsale.obj"));
 	}
-	
+
 	@RequestMapping("uploadingreceipt")
-	public ModelAndView UploadingofreceiptBos(HttpServletRequest request)
-	{		String username =(String)request.getSession().getAttribute("usrname");
+	public ModelAndView UploadingofreceiptBos(HttpServletRequest request) {
+		String username = (String) request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("uploadingofreceiptbos");
-		 if(username == null) {
-		     	mv = new ModelAndView("index");
-		         }
+		if (username == null) {
+			mv = new ModelAndView("index");
+		}
 		return mv;
 	}
-	
-	@RequestMapping("saveuploadingreceipt")  
-	public ModelAndView uploadingreceipt(HttpServletRequest request, RedirectAttributes redirectAttributes)
-	{		String username =(String)request.getSession().getAttribute("usrname");
-		try 
-		{
+
+	@RequestMapping("saveuploadingreceipt")
+	public ModelAndView uploadingreceipt(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		String username = (String) request.getSession().getAttribute("usrname");
+		try {
 			String dpc10no = request.getParameter("dpc10no");
 			String jutevariety = request.getParameter("jutevariety");
 			String jutegrade = request.getParameter("jutegrade");
@@ -552,136 +527,134 @@ public class InsertDataController_2 {
 			uploadrecipt.setReciept_date(formattedDate1);
 			this.uploadrecieptservice.create(uploadrecipt);
 			redirectAttributes.addFlashAttribute("msg",
-						"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
-								+ "");
-	
-		} catch (Exception e)
-		{
-			System.out.println("++++++++++++++"+e);
+					"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
+
+		} catch (Exception e) {
+			System.out.println("++++++++++++++" + e);
 			e.printStackTrace();
 		}
-		 if(username == null) {
-		     	return new ModelAndView("index");
-		         }
+		if (username == null) {
+			return new ModelAndView("index");
+		}
 		return new ModelAndView(new RedirectView("uploadingreceipt.obj"));
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="userpriviligeajax", method = RequestMethod.GET)
+	@RequestMapping(value = "userpriviligeajax", method = RequestMethod.GET)
 	public String userpriviligeajax(HttpServletRequest request) {
-		 String uPri="";
-		int role_Id= 0;
-		try{
-			role_Id= Integer.parseInt(request.getParameter("roleId"));
-		  uPri= userpriviligeservice.getUserPrivilegeListing(role_Id);
-		}catch(Exception ex){
+		String uPri = "";
+		int role_Id = 0;
+		try {
+			role_Id = Integer.parseInt(request.getParameter("roleId"));
+			uPri = userpriviligeservice.getUserPrivilegeListing(role_Id);
+		} catch (Exception ex) {
 			System.out.println(ex.getStackTrace());
 		}
 		return uPri;
 	}
+
 	@ResponseBody
-	@RequestMapping(value="userpriviligeajaxallData", method= RequestMethod.GET)
-		public  String getuserpriviligeajaxallData() {
-		 List<String> list=new ArrayList();
-		 String res="";
-		 
+	@RequestMapping(value = "userpriviligeajaxallData", method = RequestMethod.GET)
+	public String getuserpriviligeajaxallData() {
+		List<String> list = new ArrayList();
+		String res = "";
+
 		try {
-			list= userpriviligeservice.getuserpriviligeajaxallData();
-			
-			}
-		
-		catch(Exception e) {
+			list = userpriviligeservice.getuserpriviligeajaxallData();
+
+		}
+
+		catch (Exception e) {
 			System.out.println(e.getStackTrace());
-			
+
 		}
 		final Gson gson = new Gson();
-        return gson.toJson((Object)list);
-		
+		return gson.toJson((Object) list);
+
 	}
-	
-	
+
 	@RequestMapping("MSPgradesCombination")
-	public ModelAndView MSPgradesCombination(HttpServletRequest request)
-	{	String username =(String)request.getSession().getAttribute("usrname");
+	public ModelAndView MSPgradesCombination(HttpServletRequest request) {
+		String username = (String) request.getSession().getAttribute("usrname");
 		ModelAndView mv = new ModelAndView("MSPgradesCombination");
-		if(username == null) {
-        	mv = new ModelAndView("index");
-            }
+		if (username == null) {
+			mv = new ModelAndView("index");
+		}
 		return mv;
 	}
 
-	
-	  @RequestMapping("savegradesCombination") 
-	  public ModelAndView savegradesCombination(HttpServletRequest request, RedirectAttributes redirectAttributes,HttpSession session) {
+	@RequestMapping("savegradesCombination")
+	public ModelAndView savegradesCombination(HttpServletRequest request, RedirectAttributes redirectAttributes,
+			HttpSession session) {
 
-		  try { 
-			  String username =(String)request.getSession().getAttribute("usrname");
-			  if(username == null) {
-			     	return new ModelAndView("index");
-			         }
-				 labelGenerationModel labelgenerationModel = new labelGenerationModel(); 
-			  String basis = request.getParameter("basis"); 
-			  String cropyr = request.getParameter("cropyr"); 
-			  String label1 = request.getParameter("textbox1"); 
-			  String label2 = request.getParameter("textbox2"); 
-			  String label3 = request.getParameter("textbox3"); 
-			  String label4 = request.getParameter("textbox4"); 
-			  String label5 = request.getParameter("textbox5"); 
-			  String label6 = request.getParameter("textbox6"); 
-			  String label7 = request.getParameter("textbox7"); 
-			  String label8 = request.getParameter("textbox8"); 
-			  String label9 = request.getParameter("textbox9"); 
-			  String label10 = request.getParameter("textbox10"); 
-			  labelgenerationModel.setLabel1(label1);
-			  labelgenerationModel.setLabel2(label2);
-			  labelgenerationModel.setLabel3(label3);
-			  labelgenerationModel.setLabel4(label4);
-			  labelgenerationModel.setLabel5(label5);
-			  labelgenerationModel.setLabel6(label6);
-			  labelgenerationModel.setLabel7(label7);
-			  labelgenerationModel.setLabel8(label8);
-			  labelgenerationModel.setLabel9(label9);
-			  labelgenerationModel.setLabel10(label10); 
-			  labelgenerationModel.setBasis(basis);
-			  labelgenerationModel.setCreatedBy((String)session.getAttribute("usrname")+"  role id{"+session.getAttribute("roleId")+"}");
-			  labelgenerationModel.setCreatedOn(new Date());
-			  labelgenerationModel.setCropyr(cropyr);
-			  
-			  this.labelgenerationService.create(labelgenerationModel);
-	  
-	  redirectAttributes.addFlashAttribute("msg",
-	  "<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n"
-	  + "");
-	  
-	  } catch (Exception e) { 
-		  System.out.println("++++++++++++++"+e);
-	  e.printStackTrace(); 
-	  } 
-	
-	 return new ModelAndView(new RedirectView("MSPgradesCombination.obj")); }
-	  
-	  @RequestMapping(value = "inventory")
-	  public void firstLevel(HttpServletRequest request, RedirectAttributes redirectAttributes,HttpSession session) {
-		  ModelAndView mv = new ModelAndView("Inventory");
-		  dailyPurchaseModelConfService.firstLevel("2022-2023", "msp");
-	  }
-	  
-	  
-	  @RequestMapping(value = "SearchTally")
-	  public ModelAndView searchTally(HttpServletRequest request,HttpSession session) {
-		  ModelAndView mv = new ModelAndView("searchtally");
-		  return mv;
-		 
-	  }
-	  
-	  @ResponseBody
-      @RequestMapping(value = { "talystatus" }, method = { RequestMethod.GET })
-      public String talystatus(final HttpServletRequest request) {
-		  
-		 Gson gson = new Gson();
-		  JSONArray arr =   rawJuteProcurAndPayService.searchTally(request.getParameter("tally"));
-		 // System.out.println(arr.toString());
-         return arr.toString();
-      }
-	 
+		try {
+			String username = (String) request.getSession().getAttribute("usrname");
+			if (username == null) {
+				return new ModelAndView("index");
+			}
+			labelGenerationModel labelgenerationModel = new labelGenerationModel();
+			String basis = request.getParameter("basis");
+			String cropyr = request.getParameter("cropyr");
+			String label1 = request.getParameter("textbox1");
+			String label2 = request.getParameter("textbox2");
+			String label3 = request.getParameter("textbox3");
+			String label4 = request.getParameter("textbox4");
+			String label5 = request.getParameter("textbox5");
+			String label6 = request.getParameter("textbox6");
+			String label7 = request.getParameter("textbox7");
+			String label8 = request.getParameter("textbox8");
+			String label9 = request.getParameter("textbox9");
+			String label10 = request.getParameter("textbox10");
+			labelgenerationModel.setLabel1(label1);
+			labelgenerationModel.setLabel2(label2);
+			labelgenerationModel.setLabel3(label3);
+			labelgenerationModel.setLabel4(label4);
+			labelgenerationModel.setLabel5(label5);
+			labelgenerationModel.setLabel6(label6);
+			labelgenerationModel.setLabel7(label7);
+			labelgenerationModel.setLabel8(label8);
+			labelgenerationModel.setLabel9(label9);
+			labelgenerationModel.setLabel10(label10);
+			labelgenerationModel.setBasis(basis);
+			labelgenerationModel.setCreatedBy(
+					(String) session.getAttribute("usrname") + "  role id{" + session.getAttribute("roleId") + "}");
+			labelgenerationModel.setCreatedOn(new Date());
+			labelgenerationModel.setCropyr(cropyr);
+
+			this.labelgenerationService.create(labelgenerationModel);
+
+			redirectAttributes.addFlashAttribute("msg",
+					"<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n" + "");
+
+		} catch (Exception e) {
+			System.out.println("++++++++++++++" + e);
+			e.printStackTrace();
+		}
+
+		return new ModelAndView(new RedirectView("MSPgradesCombination.obj"));
+	}
+
+	@RequestMapping(value = "inventory")
+	public void firstLevel(HttpServletRequest request, RedirectAttributes redirectAttributes, HttpSession session) {
+		ModelAndView mv = new ModelAndView("Inventory");
+		dailyPurchaseModelConfService.firstLevel("2022-2023", "msp");
+	}
+
+	@RequestMapping(value = "SearchTally")
+	public ModelAndView searchTally(HttpServletRequest request, HttpSession session) {
+		ModelAndView mv = new ModelAndView("searchtally");
+		return mv;
+
+	}
+
+	@ResponseBody
+	@RequestMapping(value = { "talystatus" }, method = { RequestMethod.GET })
+	public String talystatus(final HttpServletRequest request) {
+
+		Gson gson = new Gson();
+		JSONArray arr = rawJuteProcurAndPayService.searchTally(request.getParameter("tally"));
+		// System.out.println(arr.toString());
+		return arr.toString();
+	}
+
 }

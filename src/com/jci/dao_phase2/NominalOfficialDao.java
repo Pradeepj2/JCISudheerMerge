@@ -1,7 +1,5 @@
 package com.jci.dao_phase2;
-
 import java.util.ArrayList;
-
 import java.util.List;
 
 import com.jci.model.Jciclaim_NominationModel;
@@ -19,8 +17,6 @@ public interface NominalOfficialDao {
 	public boolean submitform(Jciclaim_NominationModel off);
 
 // Auto Fetching Data From Different Table.
-
-	
 	public List<String> millid_MillReceipt();
 
 	public List<Object> FetchMillReceiptData(String millid);
@@ -38,11 +34,9 @@ public interface NominalOfficialDao {
 	
 	 // for fetching data from grdae_composition
 		public List<Object>  gradecomposition(String contractno);
-
 		//email process
 		 public String getEmailForOmo(String omofficial);
 		 public String getEmailForFA(String FAofficial);
 		 public String getEmaiformills(String  Mill);
-
 
 }

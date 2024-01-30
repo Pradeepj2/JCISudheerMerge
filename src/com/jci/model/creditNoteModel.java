@@ -56,7 +56,6 @@ public class creditNoteModel {
      @Temporal(value=TemporalType.TIMESTAMP)
      private Date Creation_date;
 
-
      public String getCredit_note_no() {
            return Credit_note_no;
      }
@@ -145,7 +144,6 @@ public class creditNoteModel {
            Creation_date = creation_date;
      }
 
-     
 
      public creditNoteModel( String credit_note_no, Date credit_note_date, String shipment_details,
                 Double bOS_qty, Double actual_qty, Double short_qty, Double credit_note_amount, String ro_id,
@@ -154,8 +152,6 @@ public class creditNoteModel {
            
      }
 
-  
-     
 
      @Override
      public String toString() {

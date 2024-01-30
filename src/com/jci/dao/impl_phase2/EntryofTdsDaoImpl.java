@@ -1,8 +1,17 @@
 package com.jci.dao.impl_phase2;
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+
+import javax.servlet.http.HttpServletResponse;
+
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -50,18 +59,22 @@ public class EntryofTdsDaoImpl implements EntryofTdsDao{
 		  return r;
 		
 	}
-
-	@Override
-	public String contractIdentification(String Mill) {
-		// TODO Auto-generated method stub
-
-		String q="SELECT  Mill_name FROM jcicontract where Mill_name = '"+Mill+"'";
-
-		String contractIdentication= (String) this.sessionFactory.getCurrentSession().createSQLQuery(q).uniqueResult();
-		  System.out.println(contractIdentication);
 	
-		  return contractIdentication;
-		
-	}
+	@Override
 
+    public String contractIdentification(String Mill) {
+
+           // TODO Auto-generated method stub
+		
+		String q="SELECT DISTINCT CropYear FROM jcicontract WHERE Mill_name = '"+Mill+"'";
+
+           //String q="SELECT  Mill_name FROM jcicontract where Mill_name = '"+Mill+"'";
+
+           String contractIdentication= (String) this.sessionFactory.getCurrentSession().createSQLQuery(q).uniqueResult();
+
+             System.out.println(contractIdentication);
+
+             return contractIdentication;
+
+    }
 }

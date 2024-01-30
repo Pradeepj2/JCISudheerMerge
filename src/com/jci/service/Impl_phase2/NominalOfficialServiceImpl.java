@@ -1,5 +1,4 @@
 package com.jci.service.Impl_phase2;
-
 import java.util.ArrayList;
 
 import java.util.List;
@@ -61,7 +60,6 @@ public class NominalOfficialServiceImpl implements NominalOfficialService {
 		return nominalOfficialDao.millid_MillReceipt();
 	}
 
-
 	@Override
 	public List<Object> FetchMillReceiptData(String millid) {
 		// TODO Auto-generated method stub
@@ -110,7 +108,6 @@ public class NominalOfficialServiceImpl implements NominalOfficialService {
 		// TODO Auto-generated method stub
 		return nominalOfficialDao.gradecomposition(contractno);
 	}
-
 
 	@Override
 	public String getEmailForOmo(String omofficial) {
