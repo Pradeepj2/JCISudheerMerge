@@ -615,15 +615,27 @@ public class Controller_V {
 		jciclaim_NominationModel.setFAOfficial(FAofficial);
 		jciclaim_NominationModel.setDateofInspection(DateofInpection);
 		jciclaim_NominationModel.setSettlement_id(SettlementId);
+		
+		//date  created on
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date currentDate = new Date();
+        String formattedDate = sdf.format(currentDate);
+        System.err.println("dateeeeeeeeee" +formattedDate);
+        
+        // Inspection date
+        
+        SimpleDateFormat idf = new SimpleDateFormat("yyyy-MM-dd");
+        Date create_date = new Date();
+        String Inspection_date = idf.format(create_date );
 
 		// setting Static Value for Remaining
 		jciclaim_NominationModel.setSettlement_amt(12.5);
 		jciclaim_NominationModel.setQuality_settlement(0);
 		jciclaim_NominationModel.setSupporting_doc("Supporting Documment");
-		jciclaim_NominationModel.setInspection_date("2023-07-23");
+		jciclaim_NominationModel.setInspection_date(Inspection_date);
 		jciclaim_NominationModel.setDispute_flag(0);
 		jciclaim_NominationModel.setCreated_by("Today India");
-		jciclaim_NominationModel.setCreated_on("Today");
+		jciclaim_NominationModel.setCreated_on(formattedDate);
 
 		// Setting the data in model
 

@@ -149,7 +149,7 @@ public class Jciclaim_NominationImpl implements NominalOfficialDao {
 		// TODO Auto-generated method stub
 		
 
-		String q = "SELECT jcimill_receipt.Challan_no, jcimill_receipt.MR_no, jcimill_receipt.Bale_mark, jcimill_receipt.Crop_year, jcimill_receipt.Quality_claim, jcimill_receipt.MoistureContent, jcimill_receipt.NCV_percentage, jcidispatch_details.Mill_name " +
+		String q = "SELECT Distinct jcimill_receipt.Challan_no, jcimill_receipt.MR_no, jcimill_receipt.Bale_mark, jcimill_receipt.Crop_year, jcimill_receipt.Quality_claim, jcimill_receipt.MoistureContent, jcimill_receipt.NCV_percentage, jcidispatch_details.Mill_name " +
 	            "FROM jcimill_receipt " +
 	            "LEFT JOIN jcidispatch_details ON jcimill_receipt.Mill_id = jcidispatch_details.Mill_code " +
 	            "WHERE jcidispatch_details.Mill_name = '" + millid + "'";
