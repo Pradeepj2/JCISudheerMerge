@@ -203,7 +203,8 @@ $(document).ready(function () {
 												List<ZoneModel> zoneList = (List<ZoneModel>) request.getAttribute("zoneList");
 											%>
 											<select class="form-control" name="zone" id="zone">
-												<option disabled selected value="">-Select-</option>
+
+												<option disabled selected value>-Select-</option>
 												<%
 													for (ZoneModel zoneLists : zoneList) {
 												%>
@@ -218,7 +219,8 @@ $(document).ready(function () {
 											<label id="regionLabel" class="required">Region</label>&nbsp;&nbsp;&nbsp;
 											<!-- <input class="form-control" type="text" name="region" placeholder="Region" required> -->
 											<select class="form-control" name="region" id="region">
-												<option disabled selected value="">-Select-</option>
+
+												<option disabled selected value>-Select-</option>
 											</select>
 										</div>
 										<div class="col-sm-4 form-group" id="dpc_div">
@@ -376,7 +378,7 @@ $(document).ready(function () {
 		 					 $('#centerordpc').trigger('chosen:updated');
 		 			    	}
 		 			    else
-		 			    	
+
 		 			    	{
 		 			    	$('#centerordpc option:selected').removeAttr('selected');
 		 			    	$('#centerordpc').trigger('chosen:updated');
@@ -709,10 +711,9 @@ $(document).ready(function () {
 	
 
 </script>
-	 
-	
-	
+
 	 <script src="assets/css/docsupport/jquery-3.2.1.min.js" type="text/javascript"></script> 
+
   <script src="assets/css/chosen.jquery.js" type="text/javascript"></script>
   <script src="assets/css/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
   <script src="assets/css/docsupport/init.js" type="text/javascript" charset="utf-8"></script>

@@ -1,5 +1,7 @@
 package com.jci.service_phase2;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.jci.model.Jciclaim_NominationModel;
@@ -16,7 +18,10 @@ public interface NominalOfficialService {
 	public boolean submitform(Jciclaim_NominationModel off);
 	
 	// Fetching data For Nomination of official Settlement
-	 List<String>  millid_MillReceipt();
+
+ List<String>  millid_MillReceipt();
+	//List<Object[]>  millid_MillReceipt();
+	
 	 public List<Object> FetchMillReceiptData(String millid);
 		public List<String> contractno_ContractTable() ;
 		public List<String> UsernameOM_jciumt(String role) ;
@@ -25,7 +30,17 @@ public interface NominalOfficialService {
 		public List<UserRegistrationModel> getfa_official();
 		public int CountRecord();
 		
-		public List<Object>  gradecomposition(String contractno);	
+
+		public List<Object>  gradecomposition(String contractno);
+		
+		
+		//Email service
+		 public String getEmailForFA(String FAofficial);
+		
+		public String getEmailForOmo(String omofficial);
+		public String getEmaiformills(String Mill);
+		
+
 	
 	
 }

@@ -1,5 +1,7 @@
 package com.jci.dao.impl_phase2;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -79,20 +81,81 @@ public class Jciclaim_NominationImpl implements NominalOfficialDao {
 	}
 
 
+
+//	@Override
+//	public List<Object>  millid_MillReceipt() {
+//		// TODO Auto-generated method stub
+//	// String q="SELECT DISTINCT  Mill_id FROM jcimill_receipt"; 
+//   //  String q = "select Mill_name from jcicontract left join jcimill_receipt ON jcicontract.Mill_code = jcimill_receipt.Mill_id";
+//		
+//
+//	  String q = "SELECT DISTINCT jcimill_receipt.Mill_id, jcicontract.Mill_name " +
+//	           "FROM jcimill_receipt " +
+//	           "LEFT JOIN jcicontract ON jcimill_receipt.Mill_id = jcicontract.Mill_code";
+//
+//		  List millid = (List) this.sessionFactory.getCurrentSession().createSQLQuery(q).list();
+//	
+//		  return millid;
+//	}
+//	@Override
+//	public List<Object[]>  millid_MillReceipt() {
+//		// TODO Auto-generated method stub
+//	// String q="SELECT DISTINCT  Mill_id FROM jcimill_receipt"; 
+//   //  String q = "select Mill_name from jcicontract left join jcimill_receipt ON jcicontract.Mill_code = jcimill_receipt.Mill_id";
+//		
+//
+//	  String q = "SELECT DISTINCT jcimill_receipt.Mill_id, jcicontract.Mill_name " +
+//	           "FROM jcimill_receipt " +
+//	           "LEFT JOIN jcicontract ON jcimill_receipt.Mill_id = jcicontract.Mill_code";
+//
+//	 List millid = (List) this.sessionFactory.getCurrentSession().createSQLQuery(q).list();
+//	
+//		  return millid;
+//	}
 	@Override
 	public List<String>  millid_MillReceipt() {
 		// TODO Auto-generated method stub
-		String q="SELECT DISTINCT  Mill_id FROM jcimill_receipt"; 
-		  List millid= (List) this.sessionFactory.getCurrentSession().createSQLQuery(q).list();
+	// String q="SELECT DISTINCT  Mill_id FROM jcimill_receipt"; 
+   //  String q = "select DISTINCT Mill_name from jcicontract left join jcimill_receipt ON jcicontract.Mill_code = jcimill_receipt.Mill_id";
+		String q = "select DISTINCT Mill_name from jcidispatch_details Right join jcimill_receipt ON jcidispatch_details.Mill_code = jcimill_receipt.Mill_id";
+
+
+	 List millid = (List) this.sessionFactory.getCurrentSession().createSQLQuery(q).list();
 	
 		  return millid;
 	}
+	
 
-
+//	@Override
+//	public List<Object> FetchMillReceiptData(String millid) {
+//		// TODO Auto-generated method stub
+//		//String q="SELECT Challan_no,MR_no,Bale_mark,Crop_year,Quality_claim,MoistureContent,NCV_percentage FROM jcimill_receipt where Mill_id = '"+millid+"'";
+//		//String q = "select Mill_name from jcicontract left join jcimill_receipt ON jcicontract.Mill_code = jcimill_receipt.Mill_id";
+//		
+////		String q = "SELECT jcimill_receipt.Challan_no, jcimill_receipt.MR_no, jcimill_receipt.Bale_mark, jcimill_receipt.Crop_year, jcimill_receipt.Quality_claim, jcimill_receipt.MoistureContent, jcimill_receipt.NCV_percentage, jcicontract.Mill_name " +
+////	            "FROM jcimill_receipt " +
+////	            "LEFT JOIN jcicontract ON jcimill_receipt.Mill_id = jcicontract.Mill_code " +
+////	            "WHERE jcimill_receipt.Mill_id = '" + millid + "'";
+//		String q = "SELECT jcimill_receipt.Challan_no, jcimill_receipt.MR_no, jcimill_receipt.Bale_mark, jcimill_receipt.Crop_year, jcimill_receipt.Quality_claim, jcimill_receipt.MoistureContent, jcimill_receipt.NCV_percentage, jcicontract.Mill_name " +
+//	            "FROM jcimill_receipt " +
+//	            "LEFT JOIN jcicontract ON jcimill_receipt.Mill_id = jcicontract.Mill_code " +
+//	            "WHERE jcicontract.Mill_name = '" + Mill_name + "'";
+//
+//		List<Object> ContractListData= (List<Object>) this.sessionFactory.getCurrentSession().createSQLQuery(q).list();
+//		  System.out.println(ContractListData);
+//	
+//		  return ContractListData;
+//	}
 	@Override
 	public List<Object> FetchMillReceiptData(String millid) {
 		// TODO Auto-generated method stub
-		String q="SELECT Challan_no,MR_no,Bale_mark,Crop_year,Quality_claim,MoistureContent,NCV_percentage FROM jcimill_receipt where Mill_id = '"+millid+"'";
+		
+
+		String q = "SELECT jcimill_receipt.Challan_no, jcimill_receipt.MR_no, jcimill_receipt.Bale_mark, jcimill_receipt.Crop_year, jcimill_receipt.Quality_claim, jcimill_receipt.MoistureContent, jcimill_receipt.NCV_percentage, jcidispatch_details.Mill_name " +
+	            "FROM jcimill_receipt " +
+	            "LEFT JOIN jcidispatch_details ON jcimill_receipt.Mill_id = jcidispatch_details.Mill_code " +
+	            "WHERE jcidispatch_details.Mill_name = '" + millid + "'";
+
 		List<Object> ContractListData= (List<Object>) this.sessionFactory.getCurrentSession().createSQLQuery(q).list();
 		  System.out.println(ContractListData);
 	
@@ -125,7 +188,9 @@ public class Jciclaim_NominationImpl implements NominalOfficialDao {
 	@Override
 	public List<String> UsernameFA_jciumt(String role) {
 		// TODO Auto-generated method stub
-		String q="SELECT username from where roles_name = '"+role+"'";
+
+		String q= "SELECT username from where roles_name = '"+role+"'";
+
 		List<String> FMUsername= (List<String>) this.sessionFactory.getCurrentSession().createSQLQuery(q).list();
 		  System.out.println(FMUsername);
 	
@@ -183,6 +248,38 @@ public class Jciclaim_NominationImpl implements NominalOfficialDao {
 			  return gradecomposition;
 		
 		
+	}
+
+
+	@Override
+	public String getEmailForOmo(String omofficial) {
+		String rolename = "OM Role";
+	    String q = "SELECT email FROM jciumt WHERE roles_name = '" + rolename + "' AND username = '" + omofficial + "'";
+		String omoEmail = (String) this.sessionFactory.getCurrentSession().createSQLQuery(q).uniqueResult();
+		// TODO Auto-generated method stub
+		return  omoEmail;
+	}
+
+
+	@Override
+	public String getEmailForFA(String FAofficial) {
+		// TODO Auto-generated method stub
+		String rolename = "FA Role";
+	    String q = "SELECT email FROM jciumt WHERE roles_name = '" + rolename + "' AND username = '" + FAofficial + "'";
+		String FaEmail = (String) this.sessionFactory.getCurrentSession().createSQLQuery(q).uniqueResult();
+		// TODO Auto-generated method stub
+		return  FaEmail;
+		
+	}
+
+
+	@Override
+	public String getEmaiformills(String Mill) {
+		String q="select client_email from jcimilldetailmaster where client_name = '"+Mill+ "'";
+		String MillEmail = (String) this.sessionFactory.getCurrentSession().createSQLQuery(q).uniqueResult();
+				
+		// TODO Auto-generated method stub
+		return MillEmail;
 	}
 
 	

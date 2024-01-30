@@ -56,11 +56,6 @@ public class creditNoteModel {
      @Temporal(value=TemporalType.TIMESTAMP)
      private Date Creation_date;
 
-		/*
-		 * public BigInteger getCrn_id() { return Crn_id; }
-		 * 
-		 * public void setCrn_id(BigInteger crn_id) { Crn_id = crn_id; }
-		 */
 
      public String getCredit_note_no() {
            return Credit_note_no;
@@ -151,24 +146,15 @@ public class creditNoteModel {
      }
 
      
+
      public creditNoteModel( String credit_note_no, Date credit_note_date, String shipment_details,
                 Double bOS_qty, Double actual_qty, Double short_qty, Double credit_note_amount, String ro_id,
                 int crn_status, String created_by, Date creation_date) {
            super();
            
-           Credit_note_no = credit_note_no;
-           Credit_note_date = credit_note_date;
-           Shipment_details = shipment_details;
-           BOS_qty = bOS_qty;
-           Actual_qty = actual_qty;
-           Short_qty = short_qty;
-           Credit_note_amount = credit_note_amount;
-           Ro_id = ro_id;
-           Crn_status = crn_status;
-           Created_by = created_by;
-           Creation_date = creation_date;
      }
 
+  
      
 
      @Override

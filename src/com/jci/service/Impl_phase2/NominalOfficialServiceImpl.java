@@ -1,5 +1,7 @@
 package com.jci.service.Impl_phase2;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,7 @@ public class NominalOfficialServiceImpl implements NominalOfficialService {
 		return nominalOfficialDao.millid_MillReceipt();
 	}
 
+
 	@Override
 	public List<Object> FetchMillReceiptData(String millid) {
 		// TODO Auto-generated method stub
@@ -106,6 +109,24 @@ public class NominalOfficialServiceImpl implements NominalOfficialService {
 	public List<Object> gradecomposition(String contractno) {
 		// TODO Auto-generated method stub
 		return nominalOfficialDao.gradecomposition(contractno);
+	}
+
+
+	@Override
+	public String getEmailForOmo(String omofficial) {
+		// TODO Auto-generated method stub
+		return nominalOfficialDao.getEmailForOmo(omofficial);
+	}
+
+	@Override
+	public String getEmailForFA(String FAofficial) {
+		// TODO Auto-generated method stub
+		return nominalOfficialDao.getEmailForFA(FAofficial);
+	}
+
+	@Override
+	public String getEmaiformills(String Mill) {
+		return nominalOfficialDao.getEmaiformills( Mill);
 	}
 
 }

@@ -1,5 +1,4 @@
 package com.jci.controller;
-
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.util.ArrayList;
@@ -11,12 +10,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.DoubleToIntFunction;
+
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.poi.hssf.util.HSSFColor.INDIGO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -40,7 +38,9 @@ import com.google.gson.Gson;
 import com.jci.model.EntryofSaleModel;
 import com.jci.model.UserRegistrationModel;
 import com.jci.model.EntryofpcsoModel;
+
 import com.jci.model.HODispatchInstructionModel;
+
 import com.jci.model.JciDIHoModel;
 import com.jci.model.JciEntryTdsModel;
 import com.jci.model.Jciclaim_NominationModel;
@@ -48,11 +48,14 @@ import com.jci.model.JcicontractModel;
 import com.jci.model.MillAcceptanceModel;
 import com.jci.model.PcsoDateModel;
 import com.jci.model.RoDetailsModel;
+
 import com.jci.service.PurchaseCenterService;
 import com.jci.service.RoDetailsService;
+import com.jci.service_phase2.HOInstService;
+
 import com.jci.service.Impl_phase2.EmailSender;
 import com.jci.service_phase2.EntryofTdsService;
-import com.jci.service_phase2.HOInstService;
+
 import com.jci.service_phase2.JciContractService;
 import com.jci.service_phase2.JciDIHoService;
 import com.jci.service_phase2.MillAccptanceService;
@@ -60,16 +63,11 @@ import com.jci.service_phase2.MillService;
 import com.jci.service_phase2.NominalOfficialService;
 import com.jci.service_phase2.PcsoentryService;
 
-import javax.mail.internet.InternetAddress;
 import javax.servlet.ServletException;
 
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -83,6 +81,7 @@ public class Controller_V {
 	PurchaseCenterService purchaseCenterService;
 	@Autowired
 	HOInstService hoInstService;
+
 
 	@Autowired
 	PcsoentryService pcsoentryservice;
@@ -447,7 +446,7 @@ public class Controller_V {
 	}
 	// Fetching All Data from
 
-	
+ 
 
 	// -------------------------- Nomination Settlement
 	// form---------------------------------------------------------
@@ -461,6 +460,7 @@ public class Controller_V {
 			mv = new ModelAndView("index");
 		}
 		List<String> millid = nominalOfficialService.millid_MillReceipt();
+ 
 		// fetching the Contract No From JciContract Table
 		List<UserRegistrationModel> OM_official = nominalOfficialService.getom_official();
 		List<UserRegistrationModel> FA_official = nominalOfficialService.getfa_official();
@@ -494,8 +494,7 @@ public class Controller_V {
 		System.out.println("Hello---------------- ");
 
 		List<Object> millReceiptData = nominalOfficialService.FetchMillReceiptData(millid);
-
-		System.out.println(millReceiptData);
+ 
 
 		// Convert the a JSON in string
 		Gson gson = new Gson();
@@ -539,15 +538,20 @@ public class Controller_V {
 
 	@RequestMapping("savenominal")
 	public ModelAndView saveNominalform(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+ 
 		String username = (String) request.getSession().getAttribute("usrname");
 
 		String Mill = request.getParameter("Mill");
+ 
 		String ContractNo = request.getParameter("ContractNo");
 		String ChallanNo = request.getParameter("ChallanNo");
 		String MRNo = request.getParameter("MRNo");
 		String BaleMark = request.getParameter("BaleMark");
 		String jutegrade = request.getParameter("jutegrade");
 		String CropYear = request.getParameter("CropYear");
+ 
+		String millname = request.getParameter("client_name");
+ 
 
 		// gettting data for grade wise Allocation
 
@@ -576,8 +580,13 @@ public class Controller_V {
 		double NCVPercentage = (Double) Double.parseDouble(request.getParameter("NCVPercentage"));
 		double ClaimAmount = (Double) Double.parseDouble(request.getParameter("ClaimAmount"));
 		String omofficial = request.getParameter("omofficial");
+ 
+		System.err.println(omofficial + "omofficial");
 
 		String FAofficial = request.getParameter("FAomofficial");
+
+		System.err.println(FAofficial + "FAomofficial");
+ 
 		String DateofInpection1 = request.getParameter("DateofInpection");
 
 		// date Formatting in Indian Format
@@ -636,8 +645,101 @@ public class Controller_V {
 		jciclaim_NominationModel.setQty5(q5);
 		jciclaim_NominationModel.setQty6(q6);
 
-		nominalOfficialService.create(jciclaim_NominationModel);
+ 
+		// email is working for static and dynamic both
 
+		// 1- email is for omoofficial
+
+		EmailSender email = new EmailSender();
+		InternetAddress[] toAddresses = null;
+
+		String subject = "This is the  EMail Subject of view!!";
+
+		String body = "This is the Body of the Email for om official . ";
+
+		String filename = "C:\\Users\\Mansi.Gupta\\Downloads\\new.jpg";
+		String username1 = "";
+
+		String userEmailOmo = nominalOfficialService.getEmailForOmo(omofficial);
+		System.err.println("userEmail for omo official" + userEmailOmo);
+		try {
+
+			// toAddresses = new InternetAddress[]{new InternetAddress(userEmailOmo) };
+
+			toAddresses = new InternetAddress[] { new InternetAddress("shristijb007@gmail.com")
+
+			};
+
+		} catch (AddressException e) {
+
+			e.printStackTrace();
+		}
+
+		email.sendEmail(toAddresses, body, subject, filename, username1);
+
+		// 2- These Email is for fa official
+
+		// EmailSender email=new EmailSender();
+		InternetAddress[] toAddressesfa = null;
+
+		String subjectfa = "This is the  EMail Subject of view!!";
+
+		String bodyfa = "This is the Body of the Email for fa official. ";
+
+		String filenamefa = "C:\\Users\\Mansi.Gupta\\Downloads\\new.jpg";
+		String usernamefa = "";
+		String userEmailFA = nominalOfficialService.getEmailForFA(FAofficial);
+
+		System.err.println("userEmail for fa official" + userEmailFA);
+		try {
+			
+			// toAddresses = new InternetAddress[]{ new InternetAddress(userEmailFA)};
+
+			        toAddresses = new InternetAddress[] {
+
+					new InternetAddress("mansigupta7867@gmail.com")
+			
+			};
+
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		email.sendEmail(toAddresses, bodyfa, subjectfa, filenamefa, usernamefa);
+
+		//3- These email is for MILL 
+		InternetAddress[] toAddressesMill = null;
+
+		String subjectMill = "This is the  EMail Subject of view!!";
+
+		String bodyMill = "This is the Body of the Email for Mill . ";
+
+		String filenameMill = "C:\\Users\\Mansi.Gupta\\Downloads\\new.jpg";
+		String usernameMill = "";
+
+		String userEmailMill = nominalOfficialService.getEmaiformills(Mill);
+
+		System.err.println("userEmail for getting email for mill " + userEmailMill);
+		try {
+			
+
+			// toAddresses = new InternetAddress[]{ new InternetAddress(userEmailMill)};
+
+			toAddresses = new InternetAddress[] {
+					new InternetAddress("mansi.gupta@cyfuture.com")
+//						   
+			};
+//			  
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		email.sendEmail(toAddresses, bodyMill, subjectMill, filenameMill, usernameMill);
+
+		nominalOfficialService.create(jciclaim_NominationModel);
+ 
 		redirectAttributes.addFlashAttribute("msg",
 				(Object) "<div class=\"alert alert-success\"><b>Success !</b> Record saved successfully.</div>\r\n");
 
@@ -646,35 +748,45 @@ public class Controller_V {
 	}
 
 	@RequestMapping("viewlistnominal")
-	public String ViewNominal(Model model) {
+ 
+	public String ViewNominal(Model model, HttpServletRequest request) {
+ 
 
 		List<Jciclaim_NominationModel> AllList = (List<Jciclaim_NominationModel>) nominalOfficialService.getAll();
 		model.addAttribute("jciclaim_NominationModel", AllList);
 
+
+		String omofficial = request.getParameter("omofficial");
+		System.err.println("view" + omofficial);
 		// Send Mail Function call
+//		 
+//		 EmailSender email=new EmailSender();
+//		 InternetAddress[] toAddresses=null;
+//		 
+//		 String subject="This is the  EMail Subject of view!!";
+//		
+//		  String body = "This is the Body of the Email . ";
+//		  
+//		//  String filename="C:\\Users\\sudheer.kumar1\\Downloads\\photo1.jpg";
+//		 String filename= "C:\\Users\\Mansi.Gupta\\Downloads\\new.jpg";
+//		  String username1="";
+//		  try {
+//			 //toAddresses  = {  new InternetAddress("vishal.vishwakarma@cyfuture.com") ,new InternetAddress("animesh.anand@cyfuture.com")};
+//		
+//		 
+//			  toAddresses = new InternetAddress[]{
+//					    new InternetAddress("guptamansi7867@gmail.com"),
+//					    new InternetAddress("mansigupta7867@gmail.com")
+//					};
+//		  
+//		  } catch (AddressException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		 
+//		 email.sendEmail( toAddresses ,  body , subject, filename, username1);
+////		
 
-		EmailSender email = new EmailSender();
-		InternetAddress[] toAddresses = null;
-
-		String subject = "This is the  EMail Subject!!";
-
-		String body = "This is the Body of the Email . ";
-
-		String filename = "C:\\Users\\sudheer.kumar1\\Downloads\\photo1.jpg";
-		String username = "";
-		try {
-			// toAddresses = { new InternetAddress("vishal.vishwakarma@cyfuture.com") ,new
-			// InternetAddress("animesh.anand@cyfuture.com")};
-
-			toAddresses = new InternetAddress[] { new InternetAddress("ksudheer553@gmail.com"),
-					new InternetAddress("sudheervijay83@gmail.com") };
-
-		} catch (AddressException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		email.sendEmail(toAddresses, body, subject, filename, username);
 
 		// End
 
@@ -888,10 +1000,10 @@ public class Controller_V {
 			mv = new ModelAndView("index");
 		}
 		// Adding the Mill Name as a Drop Down List In Entry Of TDS Form
+ 
+		List<String> Mill = entryofTdsService.MillName();
 
-		List<String> MillName = entryofTdsService.MillName();
-
-		mv.addObject("MillName", MillName);
+		mv.addObject("Mill", Mill);
 
 		return mv;
 	}
@@ -1022,7 +1134,9 @@ public class Controller_V {
 
 	@ResponseBody
 	@RequestMapping(value = "finacialyear", method = RequestMethod.GET)
-	public String fetchFContractIdentifcation_jcicontract(@RequestParam("Mill") String mill) {
+ 
+	public String fetchFContractIdentifcation_jcicontract(@RequestParam("Mill") String Mill) {
+ 
 
 		System.out.println("Contract Identification Number---------------- ");
 		System.out.println("Contract Identification Number---------------- ");
@@ -1034,7 +1148,9 @@ public class Controller_V {
 		System.out.println("Contract Identification Number---------------- ");
 		System.out.println("Contract Identification Number---------------- ");
 
-		String contractIdentication = entryofTdsService.contractIdentification(mill);
+ 
+		String contractIdentication = entryofTdsService.contractIdentification(Mill);
+ 
 
 		System.out.println(contractIdentication);
 
@@ -1045,6 +1161,7 @@ public class Controller_V {
 		return jsonResponse;
 
 	}
+
 
 	@RequestMapping("HOdispatchInst")
 	public ModelAndView HODispatchInstructionModel(HttpServletRequest request) {
@@ -1254,6 +1371,7 @@ public class Controller_V {
 		}
 		return new ModelAndView(new RedirectView("HOdispatchInst.obj"));
 	}
+	
 	@RequestMapping("jcilist")
 	public String jciHoList(Model model) {
 
@@ -1263,3 +1381,4 @@ public class Controller_V {
 		return "ViewJCIHO";
 	}
 }
+ 

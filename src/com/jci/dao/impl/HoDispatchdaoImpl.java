@@ -15,14 +15,12 @@ public class HoDispatchdaoImpl implements HoDispatchdao{
 	
 	@Autowired
 	SessionFactory sessionFactory;
-	
 	protected Session currentSession(){
 		return sessionFactory.getCurrentSession();
 	}
 
 	@Override
 	public void create(HODispatchInstructionModel hodispatch) {
-		// TODO Auto-generated method stub
 		currentSession().save(hodispatch);
 	}
 

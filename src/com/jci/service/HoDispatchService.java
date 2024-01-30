@@ -5,8 +5,6 @@ import com.jci.model.UserRoleModel;
 
 public interface HoDispatchService {
 
-	void create(HODispatchInstructionModel hodispatch);
- 
-	
+	void create(HODispatchInstructionModel hodispatch);	
 
 }

@@ -20,7 +20,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class JciDIHoModel {
 
 	
-	    @Id
+ 
+	 @Id
+ 
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "DI_HO_ID")
 	    private Long DI_HO_ID ; // Primary key, assumed to be BigInt
@@ -63,7 +65,7 @@ public class JciDIHoModel {
 	    
 	    @Column(name = "Jute_variety",nullable = false) 
 	    private String Jute_variety;
-	    
+ 
 	    @Column(name = "Remarks",nullable = false) 
 	    private String Remarks;
 
@@ -301,8 +303,6 @@ public class JciDIHoModel {
 					+ Gr5_qty + ", Gr6_qty=" + Gr6_qty + ", Gr7_qty=" + Gr7_qty + ", Gr8_qty=" + Gr8_qty
 					+ ", Created_by=" + Created_by + ", Creation_date=" + Creation_date + "]";
 		}
-
-		
 
 	
 	    

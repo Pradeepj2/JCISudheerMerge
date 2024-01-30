@@ -54,7 +54,9 @@ public class EntryofTdsDaoImpl implements EntryofTdsDao{
 	@Override
 	public String contractIdentification(String Mill) {
 		// TODO Auto-generated method stub
-		String q="SELECT DISTINCT Contract_identification_no FROM jcicontract where Mill_name = '"+Mill+"'";
+
+		String q="SELECT  Mill_name FROM jcicontract where Mill_name = '"+Mill+"'";
+
 		String contractIdentication= (String) this.sessionFactory.getCurrentSession().createSQLQuery(q).uniqueResult();
 		  System.out.println(contractIdentication);
 	

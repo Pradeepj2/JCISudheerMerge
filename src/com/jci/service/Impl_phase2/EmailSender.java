@@ -13,10 +13,16 @@ public class EmailSender {
 	 public void sendEmail(InternetAddress[] toAddresses, String body, String subject, String filename, String username1)
 	 {
 
-		 String smtpHost = "smtp.office365.com";
+		   // String smtpHost = "smtp.office365.com";
+		 String smtpHost = "smtp.gmail.com";
 	        int smtpPort = 587; // Use 587 for TLS or 465 for SSL
-	        String username = "jci.erp.ops@jcimail.in"; // Office 365 email address
-	        String password = "Jute@1234";
+		  
+	        String username ="guptamansi7867@gmail.com";
+	        String password ="xhoaypvcvzsctmrm";
+	        
+	       // String username = "jci.erp.ops@jcimail.in"; // Office 365 email address
+	     //  String password = "Jute@1234";
+
 	       // String recipient = "vishal.vishwakarma@cyfuture.com"; // Recipient's email address
 	        
 	        

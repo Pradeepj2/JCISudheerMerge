@@ -75,7 +75,7 @@ public class HODispatchInstructionModel {
 	
 	@Column(name = "jutegrade8")
 	private String jutegrade8;
-  
+ 
 	public int getHodispatchid() {
 		return hodispatchid;
 	}

@@ -444,6 +444,7 @@ public class InsertDataController_2 {
 	     	return new ModelAndView("index");
 	         }
 		return new ModelAndView(new RedirectView("HOdispatchInst.obj"));
+
 	}
 	
 	@RequestMapping("entryofsale")

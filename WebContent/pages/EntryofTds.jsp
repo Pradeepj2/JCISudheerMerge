@@ -67,9 +67,10 @@
                                    
 	                                      <div class="col-sm-4 form-group">
 		                                             <label>Mill </label>
-		                                        	 <select name="Mill" id="Mill" class="form-control taxtbox" required>
-		                                        		<option value="">-Select-</option>
-		                                        		<c:forEach items="${MillName}" var="item">
+
+		                                        	 <select name="Mill" id="Mill" class="form-control taxtbox" required >
+		                                        		<option value="" >-Select-</option>
+		                                        		<c:forEach items="${Mill}" var="item" >
 													<option value="${item}">${item}</option>
 												</c:forEach>
 		                                        	</select>
@@ -78,7 +79,9 @@
 		                                       
                                         <div class="col-sm-4 form-group">
 												<label>Financial year</label> 
-												<input class="form-control" name="Financialyear" id="Financialyear" type="date">
+
+												<input class="form-control" name="Financialyear" id="Financialyear" type="date" >
+
 										</div>
 										
 										
@@ -92,8 +95,9 @@
 	                                       </div>
 	                                     
 	                                       <div class="col-sm-4 form-group">
-	                                             <label>Supporting Document</label>
-	                                             <input class="form-control taxtbox" name="SupportingDocument" id="SupportingDocument" type="file" placeholder="DI No & Date" required>
+
+	                                             <input class="form-control taxtbox" name="SupportingDocument" id="SupportingDocument" type="file" placeholder="DI No & Date" required >
+
 	                                       </div>
 	                                       
 		                                 
@@ -130,81 +134,7 @@
     <!--  AJAX Call For FEtching the Financial Yera (Abhi Dummy data Fetch kr rahe h) -->
     	
 <!--    Applying Ajax Call Here -->
-	<script type="text/javascript">
-	
-	
-	// Wait for the document to be ready
-	$(document).ready(function() {
-	  // Add an event listener for the change event on the dropdown
-	  $('#Mill').on('change', function() {
-	    // Get the selected option value
-	    var selectedOption = $(this).val();
-	    //alert(selectedOption);
-	   
 
-	    // Make an AJAX call to fetch data based on the selected value
-	    $.ajax({
-	      type: 'GET',  // You can adjust the HTTP method as needed (e.g., POST)
-	      url: 'finacialyear.obj', // Replace with the actual API endpoint
-	      data: { Mill: selectedOption }, // Pass the selected option to the server
-	      success: function(data) {
-	        // Handle the response data and display it in the 'result' div
-	        
-	        alert(data);
-	     
-	        
-	   /*      var newData=jQuery.parseJSON(data);
-	        
-	      alert(newData); */
-	     
-	      /* var innerArray = newData[0];
-
-          // Access the elements within the inner array
-          var Contract_date =   innerArray[0];
-          var Contract_qty = innerArray[1];
-          var Contract_value = innerArray[2];
-          var Payment_duedate =   innerArray[3];
-          <!-- for calculation of Lc Value and based on  contracted value -->
-          
-          var ContractValueLc=(Contract_value*110)/100;
-        
-           $('#ContractDate').val(Contract_date); // Setting Data In JSP Text Field
-
-           $('#Quantity').val(Contract_qty);
-           $('#ContractValueOnline').val(Contract_value);
-           $('#paymentDue').val(Payment_duedate);
-           $('#ContractValueLc').val(ContractValueLc);
-           
-         
-	        */
-	      },
-	      error: function(err) {
-	        // Handle errors here
-	        console.error('AJAX request failed: ' + err);
-	      }
-	    });
-	  });
-	});
-
-	
-	</script>
-	   <script>
-     
-            // Create a Date object for the current date
-            var currentDate = new Date();
-
-            // Get the year, month, and day components
-            var year = currentDate.getFullYear();
-            var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-            var day = String(currentDate.getDate()).padStart(2, '0');
-
-            // Format the date as 'YYYY-MM-DD'
-            var formattedDate = year + '-' + month + '-' + day;
-
-            // Set the formatted date as the input's value
-            document.getElementById('DateofIntimation').value = formattedDate;
-     
-    </script>
 	
 
 	
