@@ -19,38 +19,46 @@
 <title>JCI | CMS</title>
 <!-- GLOBAL MAINLY STYLES-->
 <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css"
-       rel="stylesheet" />
+	rel="stylesheet" />
 <link href="./assets/vendors/font-awesome/css/font-awesome.min.css"
-       rel="stylesheet" />
+	rel="stylesheet" />
 <link href="./assets/vendors/themify-icons/css/themify-icons.css"
-       rel="stylesheet" />
+	rel="stylesheet" />
 <!-- PLUGINS STYLES-->
 <!-- THEME STYLES-->
 <link href="assets/css/main.min.css" rel="stylesheet" />
-<!-- PAGE LEVEL STYLES-->
-<script
-       src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet"
-       href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script
-       src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-<script
-       src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-       src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- CORE SCRIPTS-->
-  <link rel="stylesheet" href="assets/css/docsupport/style.css">
-  <link rel="stylesheet" href="assets/css/docsupport/prism.css">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="<%=request.getContextPath() %>/resources/css/styleUserReg.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="assets/css/chosen.css">
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/responsivevoice.js'></script>
+
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/custom.js'></script>
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.mCustomScrollbar.concat.min.js'></script>
+<script type="text/javascript" src='<%=request.getContextPath() %>/resources/js/jquery.validate.min.js'></script>
+<script src="./assets/vendors/jquery/dist/jquery.min.js"
+	type="text/javascript"></script>
+<script src="./assets/vendors/popper.js/dist/umd/popper.min.js"
+	type="text/javascript"></script>
+<script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js"
+	type="text/javascript"></script>
+<script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
+	type="text/javascript"></script>
+<script
+	src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
+	type="text/javascript"></script>
+<!-- PAGE LEVEL PLUGINS-->
+<!-- CORE SCRIPTS-->
+<script src="assets/js/app.min.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="assets/css/docsupport/style.css">
+  <link rel="stylesheet" href="assets/css/docsupport/prism.css">
+  <link rel="stylesheet" href="assets/css/chosen.css">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
 
   
 <style>
@@ -174,8 +182,8 @@
                                                                            
 
                                                                      </div>
-                                                                     <div class="col-sm-4" id="dpc_div">
-                                                                           <label id="dpclabel" class="required">DPC</label>
+                                                                     <div class="col-sm-4 form-group" id="dpc_div">
+                                                                           <label id="dpclabel" class="required" >DPC</label>
                                                                            &nbsp;&nbsp;&nbsp;
                                                                            <div class="form-control" id="dpc_div" ></div>
 
@@ -321,7 +329,7 @@
                                                
                                                    $("#centerordpc").chosen();
                                                  $("#centerordpc").addClass("chosen-select");
-                                          var selected_val =$('input[name="radioselect"]:checked').val(); 
+                                         /*  var selected_val =$('input[name="radioselect"]:checked').val();  */
                                           $('#centerordpc option').prop('selected',true);
                     $('#centerordpc').trigger('chosen:updated');
 
@@ -343,13 +351,13 @@ $("#region").on("change",function(){
        //alert("DI no.");
        var cp=$("#cropyear").val();
        var reg=(this.value);
-       alert(cp +"----------------"+reg);
+      /*  alert(cp +"----------------"+reg); */
        $.ajax({
               type:"GET",
               url:"countHo.obj",
               data:{"reg":reg},
               success:function(result){
-           alert(result+"Result")
+           /* alert(result+"Result") */
            var data= jQuery.parseJSON(result);
        
            var DI;
@@ -458,7 +466,8 @@ $("#region").on("change",function(){
               if(total === allow){
                      return true;
               } else{
-                     document.getElementById("misQty").innerText = "Allowed quantity should be equal to total";
+            	  document.getElementById("misQty").innerText = "Allowed quantity should be equal to total";
+            	  document.getElementById("misQty").style.color = "red";
          //event.preventDefault();
          return false;
                      
@@ -470,29 +479,16 @@ $("#region").on("change",function(){
 
        <!-- END PAGA BACKDROPS-->
        <!-- CORE PLUGINS-->
-       <script src="./assets/vendors/jquery/dist/jquery.min.js"
-              type="text/javascript"></script>
-       <script src="./assets/vendors/popper.js/dist/umd/popper.min.js"
-              type="text/javascript"></script>
-       <script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js"
-              type="text/javascript"></script>
-       <script src="./assets/vendors/metisMenu/dist/metisMenu.min.js"
-              type="text/javascript"></script>
-       <script
-              src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
-              type="text/javascript"></script>
-       <!-- PAGE LEVEL PLUGINS-->
-       <!-- CORE SCRIPTS-->
-       <script src="assets/js/app.min.js" type="text/javascript"></script>
+       	 <script src="assets/css/docsupport/jquery-3.2.1.min.js" type="text/javascript"></script> 
 
-       <!-- PAGE LEVEL SCRIPTS-->
-</body>
-<script src="assets/css/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
-  <script src="assets/css/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
-   
 
   <script src="assets/css/chosen.jquery.js" type="text/javascript"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="assets/css/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
+  <script src="assets/css/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
+	
+       <!-- PAGE LEVEL SCRIPTS-->
+</body>
+
 
 </html>
 
