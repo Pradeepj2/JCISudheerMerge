@@ -1,3 +1,4 @@
+
 <%@page import="org.apache.poi.util.SystemOutLogger"%>
 <%@page import="com.jci.model.Jciclaim_NominationModel"%>
 <%@page import="java.util.List"%>
@@ -46,7 +47,6 @@
 	content: " *";
 	color: red;
 }
-<<<<<<< HEAD
  
  .input-container input[type="text"] {
      background-color: #E9ECEF; /* Set the background color of the input field */
@@ -61,16 +61,6 @@
       
    
 </style>
-=======
-</style>
-<!-- <style>
-g1{
-
-}
-
-</style> -->
-
->>>>>>> 9509b2b7db0e8e9cc33984c8644af5a4c0c8077e
 </head>
 <body class="fixed-navbar" onload="myFunction()">
 	<div class="page-wrapper">
@@ -102,20 +92,12 @@ g1{
 										<div class="col-sm-4 form-group">
 											<label> Mill</label> <span class="text-danger">* </span> <select
 												name="Mill" id="Mill" class="form-control taxtbox" required>
-<<<<<<< HEAD
 											 	<option value="">Select</option> 
 												
 											<c:forEach items="${millid}" var="item">
 											<!-- <option disabled selected value>-Select-</option> -->
 												 <option value="${item}">${item}</option> 
 												</c:forEach> 
-=======
-												<option value="">Select</option>
-
-												<c:forEach items="${millid}" var="item">
-													<option value="${item}">${item}</option>
-												</c:forEach>
->>>>>>> 9509b2b7db0e8e9cc33984c8644af5a4c0c8077e
 
 
 											</select>
@@ -156,26 +138,18 @@ g1{
 												id="BaleMark" name="BaleMark" type="text" required
 												readonly="readonly">
 										</div>
-<<<<<<< HEAD
                                              <div class="col-sm-4 form-group">
 											<label> Settlement Id</label> <input
 												class="form-control taxtbox" name="SettlementId"
 												id="SettlementId" type="text" required readonly="readonly">
 										</div>
-=======
-
->>>>>>> 9509b2b7db0e8e9cc33984c8644af5a4c0c8077e
 									
 
 									</div>
 
 
 									<!--  For Showing the grade wise jute variety -->
-<<<<<<< HEAD
 									<div class="row" >
-=======
-									<div class="row">
->>>>>>> 9509b2b7db0e8e9cc33984c8644af5a4c0c8077e
 
 										<span style="font-size: 15px"> Jute Variety Grade wise</span>
 
@@ -184,7 +158,6 @@ g1{
 									<div class="row">
 
 										<div class="col-sm-4 form-group">
-<<<<<<< HEAD
 												 <div class="input-container">
 												    <label for="field1">grade 1:</label>
 												    <input type="text"  id="g1" name="g1" readonly="readonly">
@@ -219,39 +192,6 @@ g1{
 											<div class="input-container">
 												<label for="field6">grade 6:</label> <input  type="text"
 													id="g6" name="g6" readonly="readonly">
-=======
-
-
-
-											<div class="input-container">
-												<label for="field1">grade 1:</label> <input class="form-control" type="text"
-													id="g1" name="g1" >
-											</div>
-
-											<div class="input-container">
-												<label for="field2">grade 2:</label> <input type="text"
-													id="g2" name="g2" size="1000">
-											</div>
-
-											<div class="input-container">
-												<label for="field3">grade 3:</label> <input class="form-control" type="text"
-													id="g3" name="g3">
-											</div>
-
-											<div class="input-container">
-												<label for="field4">grade 4:</label> <input class="form-control" type="text"
-													id="g4" name="g4">
-											</div>
-
-											<div class="input-container">
-												<label for="field5">grade 5:</label> <input class="form-control" type="text"
-													id="g5" name="g5">
-											</div>
-
-											<div class="input-container">
-												<label for="field6">grade 6:</label> <input class="form-control" type="text"
-													id="g6" name="g6">
->>>>>>> 9509b2b7db0e8e9cc33984c8644af5a4c0c8077e
 											</div>
 
 										</div>
@@ -260,7 +200,6 @@ g1{
 										<div class="col-sm-4 form-group">
 
 											<div class="input-container">
-<<<<<<< HEAD
 												<label for="q1">Qty 1:</label> <input   type="text" id="q1"
 													name="q1" readonly="readonly">
 											</div>
@@ -288,35 +227,6 @@ g1{
 											<div class="input-container">
 												<label for="q6">Qty 6:</label> <input  type="text" id="q6"
 													name="q6"   readonly="readonly">
-=======
-												<label for="q1">Qty 1:</label> <input class="form-control" type="text" id="q1"
-													name="q1">
-											</div>
-
-											<div class="input-container">
-												<label for="q2">Qty 2:</label> <input class="form-control" type="text" id="q2"
-													name="q2">
-											</div>
-
-											<div class="input-container">
-												<label for="q3">Qty 3:</label> <input class="form-control" type="text" id="q3"
-													name="q3">
-											</div>
-
-											<div class="input-container">
-												<label for="q4">Qty 4:</label> <input class="form-control" type="text" id="q4"
-													name="q4">
-											</div>
-
-											<div class="input-container">
-												<label for="q5">Qty 5:</label> <input class="form-control" type="text" id="q5"
-													name="q5">
-											</div>
-
-											<div class="input-container">
-												<label for="q6">Qty 6:</label> <input class="form-control" type="text" id="q6"
-													name="q6">
->>>>>>> 9509b2b7db0e8e9cc33984c8644af5a4c0c8077e
 											</div>
 
 
@@ -341,11 +251,7 @@ g1{
 											<label>Quality Claim</label> <input
 												class="form-control taxtbox" name="QualityClaim"
 												id="QualityClaim" type="text" placeholder="  Quality Claim"
-<<<<<<< HEAD
 												required readonly="readonly">
-=======
-												required>
->>>>>>> 9509b2b7db0e8e9cc33984c8644af5a4c0c8077e
 										</div>
 
 										<div class="col-sm-4 form-group">
@@ -415,16 +321,7 @@ g1{
 												placeholder="Enter Date of Inspection" required>
 										</div>
 
-<<<<<<< HEAD
 										
-=======
-										<div class="col-sm-4 form-group">
-											<label> Settlement Id</label> <input
-												class="form-control taxtbox" name="SettlementId"
-												id="SettlementId" type="text" required readonly="readonly">
-										</div>
-
->>>>>>> 9509b2b7db0e8e9cc33984c8644af5a4c0c8077e
 
 									</div>
 
@@ -475,53 +372,28 @@ g1{
 			$('#Mill').on('change', function() {
 				// Get the selected option value
 				var selectedOption = $(this).val();
-<<<<<<< HEAD
 				//alert( selectedOption)
-=======
->>>>>>> 9509b2b7db0e8e9cc33984c8644af5a4c0c8077e
 
 				// Make an AJAX call to fetch data based on the selected value
 				$.ajax({
 					type : 'GET', // You can adjust the HTTP method as needed (e.g., POST)
 					url : 'fetchmillreceiptdata.obj', // Replace with the actual API endpoint
 					data : {
-<<<<<<< HEAD
 				
 						millid : selectedOption
 						//mill_name : selectedOption
 					}, // Pass the selected option to the server
 					success : function(data) {
 						// Handle the response data and display it.
-                     alert(data + "dataaaaaaaaaaaaa")
-					
+                  
+				
 
 						// Parse the JSON response
 					var response = JSON.parse(data);
              	//	var rolename = JSON.parse(data)
              	
-                    /*  var s = "<option disabled selected value>-Select-</option>";
-     				for (var i = 0; i < response.length; i++) {
-     					s += '<option value="' + response[i].split("-")[0] + ','
-     							+ response[i].split("-")[1] + '">'
-     							+ response[i].split("-")[1] + '</option>';
-     				}
-
-					 */
+                  
                       
-=======
-						millid : selectedOption
-					}, // Pass the selected option to the server
-					success : function(data) {
-						// Handle the response data and display it.
-
-					
-
-						// Parse the JSON response
-						var response = JSON.parse(data);
-
-					
-
->>>>>>> 9509b2b7db0e8e9cc33984c8644af5a4c0c8077e
 						var innerArray1 = response[0];
 
 						// Access the elements within the inner array
@@ -532,14 +404,11 @@ g1{
 						var QualityClaim = innerArray1[4];
 						var MoistureContent = innerArray1[5];
 						var NCVPercentage = innerArray1[6];
-<<<<<<< HEAD
 						//var mill_name = innerArray1[7];
 						//alert(mill_name)
 						
 						
 						
-=======
->>>>>>> 9509b2b7db0e8e9cc33984c8644af5a4c0c8077e
 
 						// For DateofInpection value settingbased on MRs
 						var DateofInpection = MRNo + "0";
@@ -595,10 +464,7 @@ g1{
 						
 
 						var response = JSON.parse(data);
-<<<<<<< HEAD
-						
-=======
->>>>>>> 9509b2b7db0e8e9cc33984c8644af5a4c0c8077e
+					
 
 						var innerArray1 = response[0];
 						var innerArray2 = response[1];

@@ -55,6 +55,7 @@ import com.jci.service_phase2.EntryofTdsService;
 
 import com.jci.service_phase2.JciContractService;
 import com.jci.service_phase2.JciDIHoService;
+import com.jci.service_phase2.MillAccept;
 import com.jci.service_phase2.MillAccptanceService;
 import com.jci.service_phase2.MillService;
 import com.jci.service_phase2.NominalOfficialService;
@@ -101,7 +102,12 @@ public class Controller_V {
 
 	@Autowired
 	EntryofTdsService entryofTdsService;
-
+	@Autowired
+	MillAccept millacct;
+	
+	
+	
+	
 //	@Autowired
 //	SessionFactory sessionFactory;
 //	protected Session currentSession(){
@@ -444,7 +450,8 @@ public class Controller_V {
 	}
 	// Fetching All Data from
 
-	// -------------------------- Nomination Settlement
+	// -------------------------- Nomination of official for claim settlement
+	// Settlement
 	// form---------------------------------------------------------
 
 // Showing the Form of Nominal  form for fILLING
@@ -505,7 +512,7 @@ public class Controller_V {
 	@RequestMapping(value = "gradecomposition", method = RequestMethod.GET)
 	public String GradeComposition(@RequestParam("ContractNo") String ContractNo) {
 
-		System.out.println("Hello Contrat No for Grade Composition ---------------- ");
+	System.out.println("Hello Contrat No for Grade Composition ---------------- ");
 		System.out.println("Hello Contrat No for Grade Composition ---------------- " + ContractNo);
 		System.out.println("Hello Contrat No for Grade Composition ---------------- " + ContractNo);
 		System.out.println("Hello Contrat No for Grade Composition ---------------- " + ContractNo);
@@ -531,10 +538,13 @@ public class Controller_V {
 
 	}
 
+
 	@RequestMapping("savenominal")
 	public ModelAndView saveNominalform(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		
 		String username = (String) request.getSession().getAttribute("usrname");
-
+		
+		
 		String Mill = request.getParameter("Mill");
 
 		String ContractNo = request.getParameter("ContractNo");
@@ -583,17 +593,27 @@ public class Controller_V {
 
 		// date Formatting in Indian Format
 
+//		SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//		SimpleDateFormat outDataFormat = new SimpleDateFormat("dd-MM-yyyy");
+//		String DateofInpection2 = null;
+//		try {
+//			Date date = inputDateFormat.parse(DateofInpection1);
+//			// Convert the Date to a formatted string
+//			DateofInpection2 = outDataFormat.format(date);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
 		SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat outDataFormat = new SimpleDateFormat("dd-MM-yyyy");
-		String DateofInpection = null;
-		try {
-			Date date = inputDateFormat.parse(DateofInpection1);
-			// Convert the Date to a formatted string
-			DateofInpection = outDataFormat.format(date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		String DateofInpection2 = null;
 
+		try {
+		    Date date = inputDateFormat.parse(DateofInpection1);
+		    // Convert the Date to a formatted string
+		    DateofInpection2 = outDataFormat.format(date);
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
 		Long SettlementId = (Long) Long.parseLong(request.getParameter("SettlementId"));
 
 		// Creating object of
@@ -609,17 +629,33 @@ public class Controller_V {
 		jciclaim_NominationModel.setClaimAmount(ClaimAmount);
 		jciclaim_NominationModel.setOMOfficial(omofficial);
 		jciclaim_NominationModel.setFAOfficial(FAofficial);
-		jciclaim_NominationModel.setDateofInspection(DateofInpection);
+		jciclaim_NominationModel.setDateofInspection(DateofInpection2);
+	System.out.println(DateofInpection2 + "DateofInpection2");
 		jciclaim_NominationModel.setSettlement_id(SettlementId);
 
+		// date- created on
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		Date currentDate = new Date();
+		String formattedDate = sdf.format(currentDate);
+		System.err.println("dateeeeeeeeee" + formattedDate);
+		System.out.println(formattedDate);
+		// Inspection date
+
+		SimpleDateFormat idf = new SimpleDateFormat("dd-MM-yyyy");
+		Date create_date = new Date();
+		String Inspection_date = idf.format(create_date);
+		
+		System.out.println(Inspection_date);
+		jciclaim_NominationModel.setInspection_date(Inspection_date);
+		jciclaim_NominationModel.setCreated_on(formattedDate);
+		
 		// setting Static Value for Remaining
+		
 		jciclaim_NominationModel.setSettlement_amt(12.5);
 		jciclaim_NominationModel.setQuality_settlement(0);
 		jciclaim_NominationModel.setSupporting_doc("Supporting Documment");
-		jciclaim_NominationModel.setInspection_date("2023-07-23");
 		jciclaim_NominationModel.setDispute_flag(0);
-		jciclaim_NominationModel.setCreated_by("Today India");
-		jciclaim_NominationModel.setCreated_on("Today");
+		jciclaim_NominationModel.setCreated_by("myself");
 
 		// Setting the data in model
 
@@ -742,35 +778,8 @@ public class Controller_V {
 		model.addAttribute("jciclaim_NominationModel", AllList);
 		String omofficial = request.getParameter("omofficial");
 		System.err.println("view" + omofficial);
-		// Send Mail Function call
-//		 
-//		 EmailSender email=new EmailSender();
-//		 InternetAddress[] toAddresses=null;
-//		 
-//		 String subject="This is the  EMail Subject of view!!";
-//		
-//		  String body = "This is the Body of the Email . ";
-//		  
-//		//  String filename="C:\\Users\\sudheer.kumar1\\Downloads\\photo1.jpg";
-//		 String filename= "C:\\Users\\Mansi.Gupta\\Downloads\\new.jpg";
-//		  String username1="";
-//		  try {
-//			 //toAddresses  = {  new InternetAddress("vishal.vishwakarma@cyfuture.com") ,new InternetAddress("animesh.anand@cyfuture.com")};
-//		
-//		 
-//			  toAddresses = new InternetAddress[]{
-//					    new InternetAddress("guptamansi7867@gmail.com"),
-//					    new InternetAddress("mansigupta7867@gmail.com")
-//					};
-//		  
-//		  } catch (AddressException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		 
-//		 email.sendEmail( toAddresses ,  body , subject, filename, username1);
-////		
-		// End
+		
+
 
 		return "viewlistnominal";
 	}
@@ -849,7 +858,7 @@ public class Controller_V {
 	// public ModelAndView saveMillAccept(HttpServletRequest request,
 	// RedirectAttributes redirectAttributes,@RequestParam("Upload")
 	// CommonsMultipartFile file,HttpSession s) {
-
+	
 	public ModelAndView saveMillAccept(HttpServletRequest request, RedirectAttributes redirectAttributes,
 			@RequestParam("upload") final MultipartFile SupportingDocument, HttpSession s)
 			throws IllegalStateException, IOException {
@@ -874,8 +883,10 @@ public class Controller_V {
 		String ContractValueOnline = request.getParameter("ContractValueOnline");
 		String ContractValueLc = request.getParameter("ContractValueLc");
 		String paymentDue = request.getParameter("paymentDue");
+		//final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\mill accept");
 
-		final File theDir = new File("C:\\Users\\sudheer.kumar1\\upload");
+		final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence");
+//		final File theDir = new File("C:\\Users\\sudheer.kumar1\\upload");
 		if (!theDir.exists()) {
 			theDir.mkdirs();
 		}
@@ -904,69 +915,109 @@ public class Controller_V {
 		return new ModelAndView(new RedirectView("viewmillaccept.obj"));
 
 	}
-
-	// for Downloading the Uploaded Document
 	@RequestMapping("downloadSupportingDocument")
+
 	public void downloadImage(@RequestParam("filename") String filename, HttpServletResponse response) {
-		String imageDirectory = "C:\\Users\\sudheer.kumar1\\upload"; // Replace with your image directory path
+
+		String imageDirectory = "C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence"; // Replace with your image
+																						// directory path
+
 		String imagePath = imageDirectory + File.separator + filename;
 
 		File imageFile = new File(imagePath);
 
 		// Check if the file exists
+
 		if (imageFile.exists()) {
+
 			try {
+
 				// Set the content type based on the file type
+
 				String contentType = determineContentType(filename);
+
 				response.setContentType(contentType);
 
 				// Set the content length and attachment disposition
+
 				response.setContentLength((int) imageFile.length());
+
 				// response.setHeader("Content-Disposition", "attachment; filename=" +
 				// filename);
+
 				response.setHeader("Content-Disposition", "");
+
 				// Stream the file content to the response
+
 				FileInputStream fileInputStream = new FileInputStream(imageFile);
+
 				OutputStream responseOutputStream = response.getOutputStream();
 
 				byte[] buffer = new byte[1024];
+
 				int bytesRead;
+
 				while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+
 					responseOutputStream.write(buffer, 0, bytesRead);
+
 				}
 
 				fileInputStream.close();
+
 				responseOutputStream.close();
+
 			} catch (IOException e) {
+
 				// Handle IO exception
+
 				e.printStackTrace();
+
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+
 			}
+
 		} else {
+
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+
 		}
+
 	}
 
 	// Utility method to determine content type based on filename
+
 	private String determineContentType(String filename) {
+
 		if (filename.endsWith(".pdf")) {
+
 			return "application/pdf";
+
 		} else if (filename.endsWith(".jpg") || filename.endsWith(".jpeg")) {
+
 			return "image/jpeg";
+
 		} else if (filename.endsWith(".png")) {
+
 			return "image/png";
+
 		} else {
+
 			return "application/octet-stream"; // Default to binary data if content type is unknown
+
 		}
 
 	}
-
 	@RequestMapping("viewmillaccept")
 	public String ViewMillAcceptance(Model model) {
 		List<MillAcceptanceModel> AllList = (List<MillAcceptanceModel>) millService.getAll();
 		model.addAttribute("AllList", AllList);
 		return "ViewMillAcceptance";
 	}
+
+	
+
+	
 
 //--------------------------------------------------------------------------------------------------------------------
 
@@ -1423,7 +1474,7 @@ public class Controller_V {
 
 		System.out.println("Contract Identification Number---------------- ");
 
-		String contractIdentication = (String) entryofTdsService.contractIdentification(Mill);
+		String contractIdentication =  (String )entryofTdsService.contractIdentification(Mill);
 
 		System.out.println(contractIdentication);
 
@@ -1436,4 +1487,57 @@ public class Controller_V {
 		return jsonResponse;
 
 	}
+
+
+//New mill acceptence
+
+@RequestMapping("viewmillAcc")
+public String ViewMillAcceptance1(Model model , HttpServletRequest request) {
+//	List<JciEntryTdsModel>AllList = (List<JciEntryTdsModel>) entryofTdsService.getAll();
+	List<JcicontractModel> AllList = (List<JcicontractModel>)millacct.getAll();
+	System.out.println( AllList + "allistttttttttttttt");
+	model.addAttribute("AllList", AllList);
+	return "listMillAcceptence";
+}
+
+@RequestMapping("savemillacpt")
+public ModelAndView saveMilAcceptence(HttpServletRequest request, RedirectAttributes redirectAttributes,
+		@RequestParam("Contract_acceptance_doc") final MultipartFile Contract_acceptance_doc, HttpSession s)
+		throws IllegalStateException, IOException {
+	final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence");
+//	final File theDir = new File("C:\\Users\\sudheer.kumar1\\upload");
+	if (!theDir.exists()) {
+		theDir.mkdirs();
+	}
+	final String filename = Contract_acceptance_doc.getOriginalFilename();
+	File serverFile = new File(theDir, filename);
+	Contract_acceptance_doc.transferTo(serverFile);
+	
+	String Contract_date= request.getParameter("Contract_date");
+	JcicontractModel millAccept = new JcicontractModel();
+	
+	millAccept.setContract_acceptance_doc(filename);
+	millAccept.setContract_date(Contract_date);
+	
+	millacct.create(millAccept);
+
+	redirectAttributes.addFlashAttribute("msg",
+			(Object) "<div class=\"alert alert-success\"><b>Success !</b> File uploaded successfully.</div>\r\n");
+
+	
+	return new ModelAndView(new RedirectView("viewmillAcc.obj"));
+}
+
+@ResponseBody
+@RequestMapping(value = { "setmillacceptflag" }, method = { RequestMethod.GET })
+public String setmillacceptflag(final HttpServletRequest request) {
+    final Gson gson = new Gson();
+    String tno =  request.getParameter("contract_id");
+    System.out.println("tno"+tno);
+    this.millacct.updatemillacceptflag(tno);
+    return gson.toJson((Object)tno);
+}
+
+
+
 }

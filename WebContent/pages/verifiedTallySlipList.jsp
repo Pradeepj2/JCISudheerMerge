@@ -72,7 +72,7 @@
  </script>  
     <script>
 	function updatefastatus(tallyno) {
-		//alert(tallyno);
+		alert(tallyno);
 		
 		$.ajax({
 			type:"GET",
@@ -168,8 +168,8 @@
 									{
 										verifyed++;
 									%>
-										  <td><button type="button" class="btn btn-success btn-sm">verified</button></td>
-									
+										 <td><button type="button" class="btn btn-success btn-sm">verified</button></td>
+									 
 									<% 
 									}else{
 								    %>

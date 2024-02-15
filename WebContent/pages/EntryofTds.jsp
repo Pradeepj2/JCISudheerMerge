@@ -90,8 +90,8 @@
 										<div class="col-sm-4 form-group">
 
 											<label>Date of Intimation</label> <input
-												class="form-control textbox" name="DateofIntimation"
-												id="DateofIntimation" type="date">
+												class="form-control textbox" name="DateofIntimation" placeholder="dd-mm-yyyy"
+												id="DateofIntimation" required readonly>
 										</div>
 
 
@@ -106,7 +106,7 @@
 											<!-- <input class="form-control textbox" id= "Financialyear" name="Financialyear" type="text" placeholder="Financial year" required readonly="readonly"> -->
 
 											<input class="form-control textbox" id="Financialyear"
-												name="Financialyear" type="text"
+												name="Financialyear"
 												placeholder="Financial year" required readonly="readonly">
 										</div>
 
@@ -151,6 +151,15 @@
 	<!--  AJAX Call For FEtching the Financial Year (Abhi Dummy data Fetch kr rahe h) -->
 
 	<!--    Applying Ajax Call Here -->
+	
+	  <script src="assets/js/app.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+ <script>
+	$( "#DateofIntimation" ).datepicker({ dateFormat: 'dd-mm-yy'    });
+</script> 
 
 	<script type="text/javascript">
 		// Wait for the document to be ready
@@ -168,7 +177,7 @@
 				var selectedOption = $(this).val();
 
 				// alert(selectedOption + "selectedOption")
-				alert("You have selected: " + selectedOption)
+			//	alert("You have selected: " + selectedOption)
 
 				$.ajax({
 
@@ -188,11 +197,12 @@
 
 						// console.log('Response data:', data)
 						console.log('data:', data);
+						var cleandata = data.replace(/"/g, '');
 
-						$("#Financialyear").val(data);
+						$("#Financialyear").val(cleandata);
 
 						//alert("response data" + data)
-						alert("Financial year of the mill is: " + data)
+						//alert("Financial year of the mill is: " + data) 
 
 					},
 

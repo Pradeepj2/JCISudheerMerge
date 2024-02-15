@@ -60,6 +60,24 @@ public class EntryofTdsDaoImpl implements EntryofTdsDao{
 		
 	}
 	
+//	@Override
+//
+//    public String contractIdentification(String Mill) {
+//
+//           // TODO Auto-generated method stub
+//		
+//		String q="SELECT DISTINCT CropYear FROM jcicontract WHERE Mill_name = '"+Mill+"'";
+//
+//           //String q="SELECT  Mill_name FROM jcicontract where Mill_name = '"+Mill+"'";
+//
+//           String contractIdentication= (String) this.sessionFactory.getCurrentSession().createSQLQuery(q).uniqueResult();
+//
+//             System.out.println(contractIdentication);
+//
+//             return contractIdentication;
+//
+//    }
+	
 	@Override
 
     public String contractIdentification(String Mill) {
@@ -77,4 +95,5 @@ public class EntryofTdsDaoImpl implements EntryofTdsDao{
              return contractIdentication;
 
     }
+
 }

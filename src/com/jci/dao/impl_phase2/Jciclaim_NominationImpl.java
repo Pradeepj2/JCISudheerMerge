@@ -78,77 +78,38 @@ public class Jciclaim_NominationImpl implements NominalOfficialDao {
 		return false;
 	}
 
-//	@Override
-//	public List<Object>  millid_MillReceipt() {
-//		// TODO Auto-generated method stub
-//	// String q="SELECT DISTINCT  Mill_id FROM jcimill_receipt"; 
-//   //  String q = "select Mill_name from jcicontract left join jcimill_receipt ON jcicontract.Mill_code = jcimill_receipt.Mill_id";
-//		
-//
-//	  String q = "SELECT DISTINCT jcimill_receipt.Mill_id, jcicontract.Mill_name " +
-//	           "FROM jcimill_receipt " +
-//	           "LEFT JOIN jcicontract ON jcimill_receipt.Mill_id = jcicontract.Mill_code";
-//
-//		  List millid = (List) this.sessionFactory.getCurrentSession().createSQLQuery(q).list();
-//	
-//		  return millid;
-//	}
-//	@Override
-//	public List<Object[]>  millid_MillReceipt() {
-//		// TODO Auto-generated method stub
-//	// String q="SELECT DISTINCT  Mill_id FROM jcimill_receipt"; 
-//   //  String q = "select Mill_name from jcicontract left join jcimill_receipt ON jcicontract.Mill_code = jcimill_receipt.Mill_id";
-//		
-//
-//	  String q = "SELECT DISTINCT jcimill_receipt.Mill_id, jcicontract.Mill_name " +
-//	           "FROM jcimill_receipt " +
-//	           "LEFT JOIN jcicontract ON jcimill_receipt.Mill_id = jcicontract.Mill_code";
-//
-//	 List millid = (List) this.sessionFactory.getCurrentSession().createSQLQuery(q).list();
-//	
-//		  return millid;
-//	}
+
+
 	@Override
 	public List<String> millid_MillReceipt() {
 		// TODO Auto-generated method stub
-		// String q="SELECT DISTINCT Mill_id FROM jcimill_receipt";
-		// String q = "select DISTINCT Mill_name from jcicontract left join
-		// jcimill_receipt ON jcicontract.Mill_code = jcimill_receipt.Mill_id";
-		String q = "select DISTINCT Mill_name from jcidispatch_details Right join jcimill_receipt ON jcidispatch_details.Mill_code = jcimill_receipt.Mill_id";
+		
+		
+		String q = "SELECT DISTINCT unit_name " +
+		           "FROM jcimilldetailchild " +
+		           "RIGHT JOIN jcimill_receipt ON jcimilldetailchild.client_unit_code = jcimill_receipt.Mill_id;";
 
+
+		
 		List millid = (List) this.sessionFactory.getCurrentSession().createSQLQuery(q).list();
 
 		return millid;
 	}
 
-//	@Override
-//	public List<Object> FetchMillReceiptData(String millid) {
-//		// TODO Auto-generated method stub
-//		//String q="SELECT Challan_no,MR_no,Bale_mark,Crop_year,Quality_claim,MoistureContent,NCV_percentage FROM jcimill_receipt where Mill_id = '"+millid+"'";
-//		//String q = "select Mill_name from jcicontract left join jcimill_receipt ON jcicontract.Mill_code = jcimill_receipt.Mill_id";
-//		
-////		String q = "SELECT jcimill_receipt.Challan_no, jcimill_receipt.MR_no, jcimill_receipt.Bale_mark, jcimill_receipt.Crop_year, jcimill_receipt.Quality_claim, jcimill_receipt.MoistureContent, jcimill_receipt.NCV_percentage, jcicontract.Mill_name " +
-////	            "FROM jcimill_receipt " +
-////	            "LEFT JOIN jcicontract ON jcimill_receipt.Mill_id = jcicontract.Mill_code " +
-////	            "WHERE jcimill_receipt.Mill_id = '" + millid + "'";
-//		String q = "SELECT jcimill_receipt.Challan_no, jcimill_receipt.MR_no, jcimill_receipt.Bale_mark, jcimill_receipt.Crop_year, jcimill_receipt.Quality_claim, jcimill_receipt.MoistureContent, jcimill_receipt.NCV_percentage, jcicontract.Mill_name " +
-//	            "FROM jcimill_receipt " +
-//	            "LEFT JOIN jcicontract ON jcimill_receipt.Mill_id = jcicontract.Mill_code " +
-//	            "WHERE jcicontract.Mill_name = '" + Mill_name + "'";
-//
-//		List<Object> ContractListData= (List<Object>) this.sessionFactory.getCurrentSession().createSQLQuery(q).list();
-//		  System.out.println(ContractListData);
-//	
-//		  return ContractListData;
-//	}
+
 	@Override
 	public List<Object> FetchMillReceiptData(String millid) {
 		// TODO Auto-generated method stub
 
-		String q = "SELECT jcimill_receipt.Challan_no, jcimill_receipt.MR_no, jcimill_receipt.Bale_mark, jcimill_receipt.Crop_year, jcimill_receipt.Quality_claim, jcimill_receipt.MoistureContent, jcimill_receipt.NCV_percentage, jcidispatch_details.Mill_name "
-				+ "FROM jcimill_receipt "
-				+ "LEFT JOIN jcidispatch_details ON jcimill_receipt.Mill_id = jcidispatch_details.Mill_code "
-				+ "WHERE jcidispatch_details.Mill_name = '" + millid + "'";
+
+		
+		String q = "SELECT DISTINCT " +
+		           "jcimill_receipt.Challan_no, jcimill_receipt.MR_no, jcimill_receipt.Bale_mark, jcimill_receipt.Crop_year, " +
+		           "jcimill_receipt.Quality_claim, jcimill_receipt.MoistureContent, jcimill_receipt.NCV_percentage, jcimilldetailchild.unit_name " +
+		           "FROM jcimill_receipt " +
+		           "LEFT JOIN jcimilldetailchild ON jcimill_receipt.Mill_id = jcimilldetailchild.client_unit_code " +
+		           "WHERE jcimilldetailchild.unit_name = '" + millid + "'";
+
 		List<Object> ContractListData = (List<Object>) this.sessionFactory.getCurrentSession().createSQLQuery(q).list();
 		System.out.println(ContractListData);
 

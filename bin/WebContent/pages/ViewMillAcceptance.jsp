@@ -60,6 +60,10 @@ table  { border-collapse: collapse; width: 100%; }
 th, td { padding: 8px 16px; white-space: nowrap; }
 th     { background:#eee; }
 </style>
+
+
+     
+        
 </head>
 
 <body class="fixed-navbar">
@@ -97,7 +101,7 @@ th     { background:#eee; }
 										<th>Payment Due Date</th>
 										<th>file Name</th>
 										<th>View Upload Signed Doc</th>
-										 
+										
 										
 										
 										
@@ -120,7 +124,8 @@ th     { background:#eee; }
 								<td>  ${item.getPaymentDue()}</td>
 									<td> ${item.getUpload()}</td>
 								<td>  <a href="downloadSupportingDocument.obj?filename=${item.getUpload()}" class="btn btn-primary" target="_blank"> View Document</a></button></td>	
-							
+								
+							 
 						</tr>
 						</c:forEach>
 										
@@ -186,6 +191,7 @@ th     { background:#eee; }
         })
   
     </script>
+   
 </body>
 
 </html>

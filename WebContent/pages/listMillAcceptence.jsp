@@ -91,7 +91,25 @@ th {
 }
 </style>
 
-
+<script>
+	function updatemillacceptflag(contract_id) {
+		
+		
+		$.ajax({
+			type:"GET",
+			url:"setmillacceptflag.obj",
+			data:{"contract_id":contract_id},
+			success:function(result){
+				
+ 				   var data= jQuery.parseJSON(result);
+ 				  
+			}	
+			
+		});
+		
+		 window.location.reload();
+	}
+	</script>
 
 </head>
 
@@ -106,7 +124,7 @@ th {
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
 			<div class="page-heading">
-				<h1 class="page-title">View MillAcceptance</h1>
+				<h1 class="page-title">Mill Acceptance List</h1>
 
 			</div>
 
@@ -123,14 +141,13 @@ th {
 
 								<thead>
 									<tr>
-										
+
 										<th>Contract No.</th>
 										<th>Contract Date</th>
 										<th>Quantity</th>
 										<th>Contract Value Online</th>
 										<th>Contract Value LC</th>
 										<th>Payment Due Date</th>
-										<th>file Name</th>
 										<th>View Upload Signed Doc</th>
 										<th>Action</th>
 
@@ -143,38 +160,57 @@ th {
 								<tbody>
 
 									<c:forEach items="${AllList}" var="item">
-
-
 										<tr>
 
-											
-											<td>${item.getContractNo()}
-											<td>${item.getContractDate()}</td>
-											<td>${item.getQuantity()}</td>
-											<td>${item.getContractValueOnline()}</td>
-											<td>${item.getContractValueLc()}</td>
 
-											<td>${item.getPaymentDue()}</td>
-											<td>${item.getUpload()}</td>
-											<td><a
-												href="downloadSupportingDocument.obj?filename=${item.getUpload()}"
-												class="btn btn-primary" target="_blank"> View Document</a>
-												</button></td>
+											<td>${item.getContract_no()}</td>
+											<td>${item.getContract_date()}</td>
+											<td>${item.getContract_qty()}</td>
+											<td>${item.getContract_value()}</td>
+											<td>${item. getPayment_duedate()}</td>
 
-											
+
+											<td>
+												<form action="savemillacpt.obj" method="POST"
+													enctype="multipart/form-data">
+
+
+													<input class="form-control taxtbox"
+														name="Contract_acceptance_doc"
+														id="Contract_acceptance_doc" type="file"
+														placeholder="Upload Document Optional"> <input
+														type="submit" value="Submit" class="btn btn-primary"
+														id="submit">
+
+
+												</form>
+											</td>
+
+											<td><c:choose>
+													<c:when test="${item.contract_acceptance_flag eq '0'}">
+														<button class="btn btn-danger btn-sm btn-block"
+															id="${contract_id}"
+															onclick="updatemillacceptflag(${item.contract_id})">
+															<i aria-hidden="true"
+																style="font-size: 10px; color: white;"></i> Accept
+														</button>
+													</c:when>
+													<c:otherwise>
+														 <button class="btn btn-danger btn-sm btn-block"
+															style="background-color: green; color: white;">
+
+															<i aria-hidden="true" style="font-size: 10px;"></i>
+															Accepted
+														</button> 
+														
+
+													</c:otherwise>
+												</c:choose></td>
+
 										</tr>
 									</c:forEach>
 
 
-									<%-- 		<%-- <td><%=bnaList.getEnable()==1?"Active":"Inactive"%></td> --%>
-									<%-- <td><a href="updateuserProfile.obj?id=<%=UserRegistrationList.getRefid()%>"><button class="btn btn-default" type="button">Edit</button></a></td>
-	<td><a href="bnaDelete.obj?id=<%=UserRegistrationList.getRefid()%>" class="btn btn-danger btn-sm btn-block" onclick="return confirm('Are you sure you want to delete this BNA')">Delete</a></td>
- 						 
- --%>
-									<%-- 	</tr>
-									<% 
-								  }  
-							i++; } --%>
 
 
 
@@ -234,8 +270,9 @@ th {
 		})
 	</script>
 
-	
+
 
 </body>
 
 </html>
+

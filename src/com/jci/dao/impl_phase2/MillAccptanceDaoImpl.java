@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jci.dao_phase2.MillAcceptanceDao;
 import com.jci.model.JciDIHoModel;
+import com.jci.model.Jciclaim_NominationModel;
 import com.jci.model.JcicontractModel;
 
 @Transactional
@@ -24,7 +25,8 @@ public class MillAccptanceDaoImpl implements MillAcceptanceDao{
 
 	@Autowired
 	SessionFactory sessionFactory;
-	protected Session currentSession(){
+
+	protected Session currentSession() {
 		return sessionFactory.getCurrentSession();
 	}
 	@Override
@@ -36,10 +38,13 @@ public class MillAccptanceDaoImpl implements MillAcceptanceDao{
 
 	@Override
 	public List<JcicontractModel> getAll() {
+		
 		// TODO Auto-generated method stub
+
 		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(JcicontractModel.class);
-		List<JcicontractModel> ll=c.list();
+		List<JcicontractModel> ll = c.list();
 		return ll;
+		
 	}
 
 }
