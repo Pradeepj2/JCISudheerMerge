@@ -107,6 +107,7 @@ th {
 			
 		});
 		
+		 
 		 window.location.reload();
 	}
 	</script>
@@ -175,34 +176,31 @@ th {
 													enctype="multipart/form-data">
 
 
-													<input class="form-control taxtbox"
-														name="Contract_acceptance_doc"
-														id="Contract_acceptance_doc" type="file"
-														placeholder="Upload Document Optional"> <input
-														type="submit" value="Submit" class="btn btn-primary"
+													<input type="file" name="Contract_acceptance_doc" id="Contract_acceptance_doc">
+													<br>
+													<input type="submit" value="Upload" class="btn btn-primary"
 														id="submit">
-
-
+												
 												</form>
 											</td>
 
 											<td><c:choose>
 													<c:when test="${item.contract_acceptance_flag eq '0'}">
-														<button class="btn btn-danger btn-sm btn-block"
-															id="${contract_id}"
+														<button class="btn btn-danger btn-sm btn-block "
+															id="${contract_id}" style="width:55px"
 															onclick="updatemillacceptflag(${item.contract_id})">
 															<i aria-hidden="true"
 																style="font-size: 10px; color: white;"></i> Accept
 														</button>
 													</c:when>
 													<c:otherwise>
-														 <button class="btn btn-danger btn-sm btn-block"
-															style="background-color: green; color: white;">
+													 <button class="btn btn-success btn-sm" style="background-color: green;
+															 color: white;">
 
 															<i aria-hidden="true" style="font-size: 10px;"></i>
 															Accepted
 														</button> 
-														
+													
 
 													</c:otherwise>
 												</c:choose></td>

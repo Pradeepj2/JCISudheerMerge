@@ -1493,6 +1493,15 @@ public class Controller_V {
 
 @RequestMapping("viewmillAcc")
 public String ViewMillAcceptance1(Model model , HttpServletRequest request) {
+	String username = (String) request.getSession().getAttribute("usrname");
+
+	ModelAndView mv = new ModelAndView("EntryofTds");
+
+	if (username == null) {
+
+		return "index";
+
+	}
 //	List<JciEntryTdsModel>AllList = (List<JciEntryTdsModel>) entryofTdsService.getAll();
 	List<JcicontractModel> AllList = (List<JcicontractModel>)millacct.getAll();
 	System.out.println( AllList + "allistttttttttttttt");
