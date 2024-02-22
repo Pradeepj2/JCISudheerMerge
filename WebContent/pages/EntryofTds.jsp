@@ -132,7 +132,7 @@
 
 										<div class="col-sm-12 form-group">
 											<input type="submit" value="Submit" class="btn btn-primary"
-												id="submit">
+												id="submit" onclick="f()">
 										</div>
 									</div>
 								</form>
@@ -160,6 +160,15 @@
  <script>
 	$( "#DateofIntimation" ).datepicker({ dateFormat: 'dd-mm-yy'    });
 </script> 
+<script>
+function f(){
+	 alert(document.getElementsByName("SupportingDocument"))
+	 var fileInput = document.getElementByName("SupportingDocument");
+	 alert(fileInput);
+	   var file = fileInput.files[0];
+	   alert("file"+file)
+}
+</script>
 
 	<script type="text/javascript">
 		// Wait for the document to be ready

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -102,17 +104,10 @@ public class Controller_V {
 
 	@Autowired
 	EntryofTdsService entryofTdsService;
+	
 	@Autowired
 	MillAccept millacct;
-	
-	
-	
-	
-//	@Autowired
-//	SessionFactory sessionFactory;
-//	protected Session currentSession(){
-//		return sessionFactory.getCurrentSession();
-//	}
+
 
 	@RequestMapping("entryofpcso")
 	public ModelAndView EntryofpcsoModel(HttpServletRequest request) {
@@ -512,7 +507,7 @@ public class Controller_V {
 	@RequestMapping(value = "gradecomposition", method = RequestMethod.GET)
 	public String GradeComposition(@RequestParam("ContractNo") String ContractNo) {
 
-	System.out.println("Hello Contrat No for Grade Composition ---------------- ");
+		System.out.println("Hello Contrat No for Grade Composition ---------------- ");
 		System.out.println("Hello Contrat No for Grade Composition ---------------- " + ContractNo);
 		System.out.println("Hello Contrat No for Grade Composition ---------------- " + ContractNo);
 		System.out.println("Hello Contrat No for Grade Composition ---------------- " + ContractNo);
@@ -538,13 +533,11 @@ public class Controller_V {
 
 	}
 
-
 	@RequestMapping("savenominal")
 	public ModelAndView saveNominalform(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		
+
 		String username = (String) request.getSession().getAttribute("usrname");
-		
-		
+
 		String Mill = request.getParameter("Mill");
 
 		String ContractNo = request.getParameter("ContractNo");
@@ -608,11 +601,11 @@ public class Controller_V {
 		String DateofInpection2 = null;
 
 		try {
-		    Date date = inputDateFormat.parse(DateofInpection1);
-		    // Convert the Date to a formatted string
-		    DateofInpection2 = outDataFormat.format(date);
+			Date date = inputDateFormat.parse(DateofInpection1);
+			// Convert the Date to a formatted string
+			DateofInpection2 = outDataFormat.format(date);
 		} catch (ParseException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 		Long SettlementId = (Long) Long.parseLong(request.getParameter("SettlementId"));
 
@@ -630,7 +623,7 @@ public class Controller_V {
 		jciclaim_NominationModel.setOMOfficial(omofficial);
 		jciclaim_NominationModel.setFAOfficial(FAofficial);
 		jciclaim_NominationModel.setDateofInspection(DateofInpection2);
-	System.out.println(DateofInpection2 + "DateofInpection2");
+		System.out.println(DateofInpection2 + "DateofInpection2");
 		jciclaim_NominationModel.setSettlement_id(SettlementId);
 
 		// date- created on
@@ -644,13 +637,13 @@ public class Controller_V {
 		SimpleDateFormat idf = new SimpleDateFormat("dd-MM-yyyy");
 		Date create_date = new Date();
 		String Inspection_date = idf.format(create_date);
-		
+
 		System.out.println(Inspection_date);
 		jciclaim_NominationModel.setInspection_date(Inspection_date);
 		jciclaim_NominationModel.setCreated_on(formattedDate);
-		
+
 		// setting Static Value for Remaining
-		
+
 		jciclaim_NominationModel.setSettlement_amt(12.5);
 		jciclaim_NominationModel.setQuality_settlement(0);
 		jciclaim_NominationModel.setSupporting_doc("Supporting Documment");
@@ -778,8 +771,6 @@ public class Controller_V {
 		model.addAttribute("jciclaim_NominationModel", AllList);
 		String omofficial = request.getParameter("omofficial");
 		System.err.println("view" + omofficial);
-		
-
 
 		return "viewlistnominal";
 	}
@@ -858,7 +849,7 @@ public class Controller_V {
 	// public ModelAndView saveMillAccept(HttpServletRequest request,
 	// RedirectAttributes redirectAttributes,@RequestParam("Upload")
 	// CommonsMultipartFile file,HttpSession s) {
-	
+
 	public ModelAndView saveMillAccept(HttpServletRequest request, RedirectAttributes redirectAttributes,
 			@RequestParam("upload") final MultipartFile SupportingDocument, HttpSession s)
 			throws IllegalStateException, IOException {
@@ -883,7 +874,8 @@ public class Controller_V {
 		String ContractValueOnline = request.getParameter("ContractValueOnline");
 		String ContractValueLc = request.getParameter("ContractValueLc");
 		String paymentDue = request.getParameter("paymentDue");
-		//final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\mill accept");
+		// final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\mill
+		// accept");
 
 		final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence");
 //		final File theDir = new File("C:\\Users\\sudheer.kumar1\\upload");
@@ -915,12 +907,13 @@ public class Controller_V {
 		return new ModelAndView(new RedirectView("viewmillaccept.obj"));
 
 	}
+
 	@RequestMapping("downloadSupportingDocument")
 
 	public void downloadImage(@RequestParam("filename") String filename, HttpServletResponse response) {
 
 		String imageDirectory = "C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence"; // Replace with your image
-																						// directory path
+		// directory path
 
 		String imagePath = imageDirectory + File.separator + filename;
 
@@ -1008,16 +1001,13 @@ public class Controller_V {
 		}
 
 	}
+
 	@RequestMapping("viewmillaccept")
 	public String ViewMillAcceptance(Model model) {
 		List<MillAcceptanceModel> AllList = (List<MillAcceptanceModel>) millService.getAll();
 		model.addAttribute("AllList", AllList);
 		return "ViewMillAcceptance";
 	}
-
-	
-
-	
 
 //--------------------------------------------------------------------------------------------------------------------
 
@@ -1266,29 +1256,7 @@ public class Controller_V {
 			@RequestParam("SupportingDocument") final MultipartFile SupportingDocument, HttpSession s)
 			throws IllegalStateException, IOException {
 
-		System.out.println("Save Entry TDS Method");
-
-		System.out.println("Save Entry TDS Method");
-
-		System.out.println("Save Entry TDS Method");
-
-		System.out.println("Save Entry TDS Method");
-
-		System.out.println("Save Entry TDS Method");
-
-		System.out.println("Save Entry TDS Method");
-
-		System.out.println("Save Entry TDS Method");
-
-		System.out.println("Save Entry TDS Method");
-
-		System.out.println("Save Entry TDS Method");
-
-		System.out.println("Save Entry TDS Method");
-
-		System.out.println("Save Entry TDS Method");
-
-		System.out.println("Save Entry TDS Method");
+	
 
 		String username = (String) request.getSession().getAttribute("usrname");
 
@@ -1300,7 +1268,7 @@ public class Controller_V {
 
 		// String SupportingDocument = request.getParameter("SupportingDocument");
 
-		final File theDir = new File("C:\\Users\\Acer\\Downloads\\upload\\entryoftdsupload");
+		final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence");
 
 		if (!theDir.exists()) {
 
@@ -1325,7 +1293,7 @@ public class Controller_V {
 		jciEntryTdsModel.setDate_of_Intimation(DateofIntimation);
 
 		jciEntryTdsModel.setSupporting_document(filename);
-
+          System.err.println(filename);
 		// setting Static Value for Remaining
 
 		entryofTdsService.create(jciEntryTdsModel);
@@ -1356,7 +1324,7 @@ public class Controller_V {
 
 	public void downloadDoc(@RequestParam("filename") String filename, HttpServletResponse response) {
 
-		String imageDirectory = "C:\\Users\\Acer\\Downloads\\upload\\entryoftdsupload"; // Replace with your image
+		String imageDirectory = "C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence"; // Replace with your image
 																						// directory path
 
 		String imagePath = imageDirectory + File.separator + filename;
@@ -1474,7 +1442,7 @@ public class Controller_V {
 
 		System.out.println("Contract Identification Number---------------- ");
 
-		String contractIdentication =  (String )entryofTdsService.contractIdentification(Mill);
+		String contractIdentication = (String) entryofTdsService.contractIdentification(Mill);
 
 		System.out.println(contractIdentication);
 
@@ -1488,65 +1456,209 @@ public class Controller_V {
 
 	}
 
-
 //New mill acceptence
+	
 
-@RequestMapping("viewmillAcc")
-public String ViewMillAcceptance1(Model model , HttpServletRequest request) {
-	String username = (String) request.getSession().getAttribute("usrname");
+	@RequestMapping("viewmillAcc")
+	public String ViewMillAcceptance1(Model model, HttpServletRequest request) {
+		String username = (String) request.getSession().getAttribute("usrname");
 
-	ModelAndView mv = new ModelAndView("EntryofTds");
+		ModelAndView mv = new ModelAndView("EntryofTds");
 
-	if (username == null) {
+		if (username == null) {
 
-		return "index";
+			return "index";
 
+		}
+		List<JcicontractModel> AllList = (List<JcicontractModel>) millacct.getAll();
+		System.out.println(AllList + "allistttttttttttttt");
+		model.addAttribute("AllList", AllList);
+		return "listMillAcceptence";
 	}
-//	List<JciEntryTdsModel>AllList = (List<JciEntryTdsModel>) entryofTdsService.getAll();
-	List<JcicontractModel> AllList = (List<JcicontractModel>)millacct.getAll();
-	System.out.println( AllList + "allistttttttttttttt");
-	model.addAttribute("AllList", AllList);
-	return "listMillAcceptence";
-}
+	
+//	@ResponseBody
+//	@RequestMapping(value = { "savemill" }, method = { RequestMethod.POST})
+//	public String setmillacceptflag(@RequestParam("contract_id") String tno,
+//	                                @RequestParam("Acceptance_doc_path") MultipartFile Acceptance_doc_path , final HttpServletRequest request) 
+//	                                throws IllegalStateException, IOException {
+//	    
+//	    final Gson gson = new Gson();
+//	   
+//	    if (Acceptance_doc_path != null && !Acceptance_doc_path.isEmpty()) {
+//	    final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence");
+//
+//	    if (!theDir.exists()) {
+//	        theDir.mkdirs();
+//	    }
+//
+//	    final String filename = Acceptance_doc_path.getOriginalFilename();
+//	    System.err.println(filename);
+//
+//	    File serverFile = new File(theDir, filename);
+//
+//	    Acceptance_doc_path.transferTo(serverFile);
+//
+////	    this.millacct.updatemillacceptflag(tno, filename);
+//	    millacct.updatemillacceptflag(tno, filename);
+//	    }else {
+//	    	String filename="null";
+//	    	 millacct.updatemillacceptflag(tno,filename);
+//	    }
+//
+//	    return gson.toJson((Object) tno);
+//	}
+//	
+	//@ResponseBody
+	//@RequestMapping(value = { "savemill" }, method = { RequestMethod.POST })
+	@RequestMapping("savemill")
+	public String setmillacceptflag(@RequestParam("contract_id") String tno,
+	                                @RequestParam("Acceptance_doc_path") MultipartFile Acceptance_doc_path,
+	                                final HttpServletRequest request) throws IllegalStateException, IOException {
 
-@RequestMapping("savemillacpt")
-public ModelAndView saveMilAcceptence(HttpServletRequest request, RedirectAttributes redirectAttributes,
-		@RequestParam("Contract_acceptance_doc") final MultipartFile Contract_acceptance_doc, HttpSession s)
-		throws IllegalStateException, IOException {
-	final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence");
-//	final File theDir = new File("C:\\Users\\sudheer.kumar1\\upload");
-	if (!theDir.exists()) {
-		theDir.mkdirs();
+	    final Gson gson = new Gson();
+        System.err.println("Acceptance_doc_path___"+Acceptance_doc_path);
+	    if (Acceptance_doc_path != null && !Acceptance_doc_path.isEmpty()) {
+	        final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence");
+
+	        if (!theDir.exists()) {
+	            theDir.mkdirs();
+	        }
+
+	        final String filename = Acceptance_doc_path.getOriginalFilename();
+	        System.err.println(filename);
+
+	        File serverFile = new File(theDir, filename);
+
+	        Acceptance_doc_path.transferTo(serverFile);
+
+	        millacct.updatemillacceptflag(tno, filename);
+	    } else {
+	        // No file selected, handle it accordingly
+	        String filename = "null";
+	        millacct.updatemillacceptflag(tno, filename);
+	    }
+
+	    return gson.toJson((Object) tno);
 	}
-	final String filename = Contract_acceptance_doc.getOriginalFilename();
-	File serverFile = new File(theDir, filename);
-	Contract_acceptance_doc.transferTo(serverFile);
-	
-	String Contract_date= request.getParameter("Contract_date");
-	JcicontractModel millAccept = new JcicontractModel();
-	
-	millAccept.setContract_acceptance_doc(filename);
-	millAccept.setContract_date(Contract_date);
-	
-	millacct.create(millAccept);
-
-	redirectAttributes.addFlashAttribute("msg",
-			(Object) "<div class=\"alert alert-success\"><b>Success !</b> File uploaded successfully.</div>\r\n");
 
 	
-	return new ModelAndView(new RedirectView("viewmillAcc.obj"));
-}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	@ResponseBody
+//	@RequestMapping(value = { "s" }, method = { RequestMethod.POST })
+//	public String setmillacceptflag(final HttpServletRequest request  )throws IllegalStateException, IOException  {
+//		final Gson gson = new Gson();
+//		String tno = request.getParameter("contract_id");
+//		String filename = request.getParameter("file");
+//		//filename.getOriginalFilename();
+//		System.err.println(filename +"mmmmm");	
+//		System.out.println(tno + " "+ filename);
+//		System.out.println("tno" + tno);
+//		
+//		this.millacct.updatemillacceptflag(tno,filename);
+//		return gson.toJson((Object) tno);
+//	}
+	
+//	@ResponseBody
+//	@RequestMapping(value = { "s" }, method = { RequestMethod.POST })
+//	public String setmillacceptflag(final HttpServletRequest request  )throws IllegalStateException, IOException  {
+//		final Gson gson = new Gson();
+//		String tno = request.getParameter("contract_id");
+//		String filename = request.getParameter("file");
+//		
+//		System.err.println(filename +"mmmmm");	
+//		System.out.println(tno + " "+ filename);
+//		System.out.println("tno" + tno);
+//		
+//		this.millacct.updatemillacceptflag(tno,filename);
+//		return gson.toJson((Object) tno);
+//	}
+//	
+	
+	
+//	
+//	these worked
+	
+//	@ResponseBody
+//	@RequestMapping(value = {"s"}, method = { RequestMethod.GET })
+//	public String setmillacceptflag(@RequestParam("contract_id") String tno,
+//	                                @RequestPart("Acceptance_doc_path") MultipartFile Acceptance_doc_path) 
+//	                                throws IllegalStateException, IOException {
+//		
+//	    final Gson gson = new Gson();
+//	    
+//	    final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence");
+//
+//		if (!theDir.exists()) {
+//
+//			theDir.mkdirs();
+//
+//		}
+//
+//		final String filename = Acceptance_doc_path.getOriginalFilename();
+//
+//		File serverFile = new File(theDir, filename);
+//
+//		Acceptance_doc_path.transferTo(serverFile);
+//
+//		
+//	 //   String filename =file.getOriginalFilename();
+//
+//	  //  System.out.println(tno + " " + (file != null ? file.getOriginalFilename() : "No file"));
+//	    //System.out.println("tno" + tno);
+//
+//	    this.millacct.updatemillacceptflag(tno, filename);
+//
+//	    return gson.toJson((Object) tno);
+//	}
 
-@ResponseBody
-@RequestMapping(value = { "setmillacceptflag" }, method = { RequestMethod.GET })
-public String setmillacceptflag(final HttpServletRequest request) {
-    final Gson gson = new Gson();
-    String tno =  request.getParameter("contract_id");
-    System.out.println("tno"+tno);
-    this.millacct.updatemillacceptflag(tno);
-    return gson.toJson((Object)tno);
-}
 
 
+	//@ResponseBody
+		//@RequestMapping(value = { "savemill" }, method = { RequestMethod.POST })
+//		@RequestMapping("savemill")
+//		public String setmillacceptflag(@RequestParam("contract_id") String tno,
+//		                                @RequestParam("Acceptance_doc_path") MultipartFile Acceptance_doc_path,
+//		                                final HttpServletRequest request) throws IllegalStateException, IOException {
+//
+//		    final Gson gson = new Gson();
+//	System.err.println("Acceptance_doc_path___"+Acceptance_doc_path);
+//		    if (Acceptance_doc_path != null && !Acceptance_doc_path.isEmpty()) {
+//		        final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence");
+//
+//		        if (!theDir.exists()) {
+//		            theDir.mkdirs();
+//		        }
+//
+//		        final String filename = Acceptance_doc_path.getOriginalFilename();
+//		        System.err.println(filename);
+//
+//		        File serverFile = new File(theDir, filename);
+//
+//		        Acceptance_doc_path.transferTo(serverFile);
+//
+//		        millacct.updatemillacceptflag(tno, filename);
+//		    } else {
+//		        // No file selected, handle it accordingly
+//		        String filename = "null";
+//		        millacct.updatemillacceptflag(tno, filename);
+//		    }
+//
+//		    return gson.toJson((Object) tno);
+//		}
+
+		
+
+
+
+
+	
 
 }

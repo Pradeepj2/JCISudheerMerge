@@ -47,6 +47,7 @@ public class JcicontractModel {
 	@Column(name = "Delivery_type", nullable = false)
 	private String Delivery_type;
 	
+
 	@Column(name = "Grade_composition_id", nullable = false)
 	private double Grade_composition_id;
 	
@@ -70,6 +71,7 @@ public class JcicontractModel {
 	@Column(name = "Contract_acceptance_doc",length = 250)
 	private String Contract_acceptance_doc;
 	
+	
 	@Column(name = "Intial_Payment_date")
 	private String Intial_Payment_date;
 	
@@ -84,6 +86,10 @@ public class JcicontractModel {
 	
 	@Column(name = "Created_by")
 	private String Created_by;
+	
+	
+	@Column(name = "Acceptance_doc_path",length = 250)
+	private String Acceptance_doc_path;
 
 	public Long getContract_id() {
 		return contract_id;
@@ -268,7 +274,17 @@ public class JcicontractModel {
 	public void setCreated_by(String created_by) {
 		Created_by = created_by;
 	}
+	
 
+	public String getAcceptance_doc_path() {
+		return Acceptance_doc_path;
+	}
+
+	public void setAcceptance_doc_path(String acceptance_doc_path) {
+		Acceptance_doc_path = acceptance_doc_path;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "JcicontractModel [contract_id=" + contract_id + ", Pcso_date=" + Pcso_date
@@ -281,8 +297,11 @@ public class JcicontractModel {
 				+ Contract_acceptance_flag + ", Contract_acceptance_date=" + Contract_acceptance_date
 				+ ", Contract_acceptance_doc=" + Contract_acceptance_doc + ", Intial_Payment_date="
 				+ Intial_Payment_date + ", Intial_Payment_flag=" + Intial_Payment_flag + ", Contract_status="
-				+ Contract_status + ", Created_date=" + Created_date + ", Created_by=" + Created_by + "]";
+				+ Contract_status + ", Created_date=" + Created_date + ", Created_by=" + Created_by
+				+ ", Acceptance_doc_path=" + Acceptance_doc_path + "]";
 	}
+//	
+
 	
 	
 }
