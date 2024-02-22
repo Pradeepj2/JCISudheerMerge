@@ -1476,41 +1476,10 @@ public class Controller_V {
 		return "listMillAcceptence";
 	}
 	
-//	@ResponseBody
-//	@RequestMapping(value = { "savemill" }, method = { RequestMethod.POST})
-//	public String setmillacceptflag(@RequestParam("contract_id") String tno,
-//	                                @RequestParam("Acceptance_doc_path") MultipartFile Acceptance_doc_path , final HttpServletRequest request) 
-//	                                throws IllegalStateException, IOException {
-//	    
-//	    final Gson gson = new Gson();
-//	   
-//	    if (Acceptance_doc_path != null && !Acceptance_doc_path.isEmpty()) {
-//	    final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence");
-//
-//	    if (!theDir.exists()) {
-//	        theDir.mkdirs();
-//	    }
-//
-//	    final String filename = Acceptance_doc_path.getOriginalFilename();
-//	    System.err.println(filename);
-//
-//	    File serverFile = new File(theDir, filename);
-//
-//	    Acceptance_doc_path.transferTo(serverFile);
-//
-////	    this.millacct.updatemillacceptflag(tno, filename);
-//	    millacct.updatemillacceptflag(tno, filename);
-//	    }else {
-//	    	String filename="null";
-//	    	 millacct.updatemillacceptflag(tno,filename);
-//	    }
-//
-//	    return gson.toJson((Object) tno);
-//	}
-//	
-	//@ResponseBody
-	//@RequestMapping(value = { "savemill" }, method = { RequestMethod.POST })
-	@RequestMapping("savemill")
+
+	@ResponseBody
+	@RequestMapping(value = { "savemill" }, method = { RequestMethod.POST })
+	
 	public String setmillacceptflag(@RequestParam("contract_id") String tno,
 	                                @RequestParam("Acceptance_doc_path") MultipartFile Acceptance_doc_path,
 	                                final HttpServletRequest request) throws IllegalStateException, IOException {
@@ -1541,124 +1510,6 @@ public class Controller_V {
 	    return gson.toJson((Object) tno);
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	@ResponseBody
-//	@RequestMapping(value = { "s" }, method = { RequestMethod.POST })
-//	public String setmillacceptflag(final HttpServletRequest request  )throws IllegalStateException, IOException  {
-//		final Gson gson = new Gson();
-//		String tno = request.getParameter("contract_id");
-//		String filename = request.getParameter("file");
-//		//filename.getOriginalFilename();
-//		System.err.println(filename +"mmmmm");	
-//		System.out.println(tno + " "+ filename);
-//		System.out.println("tno" + tno);
-//		
-//		this.millacct.updatemillacceptflag(tno,filename);
-//		return gson.toJson((Object) tno);
-//	}
-	
-//	@ResponseBody
-//	@RequestMapping(value = { "s" }, method = { RequestMethod.POST })
-//	public String setmillacceptflag(final HttpServletRequest request  )throws IllegalStateException, IOException  {
-//		final Gson gson = new Gson();
-//		String tno = request.getParameter("contract_id");
-//		String filename = request.getParameter("file");
-//		
-//		System.err.println(filename +"mmmmm");	
-//		System.out.println(tno + " "+ filename);
-//		System.out.println("tno" + tno);
-//		
-//		this.millacct.updatemillacceptflag(tno,filename);
-//		return gson.toJson((Object) tno);
-//	}
-//	
-	
-	
-//	
-//	these worked
-	
-//	@ResponseBody
-//	@RequestMapping(value = {"s"}, method = { RequestMethod.GET })
-//	public String setmillacceptflag(@RequestParam("contract_id") String tno,
-//	                                @RequestPart("Acceptance_doc_path") MultipartFile Acceptance_doc_path) 
-//	                                throws IllegalStateException, IOException {
-//		
-//	    final Gson gson = new Gson();
-//	    
-//	    final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence");
-//
-//		if (!theDir.exists()) {
-//
-//			theDir.mkdirs();
-//
-//		}
-//
-//		final String filename = Acceptance_doc_path.getOriginalFilename();
-//
-//		File serverFile = new File(theDir, filename);
-//
-//		Acceptance_doc_path.transferTo(serverFile);
-//
-//		
-//	 //   String filename =file.getOriginalFilename();
-//
-//	  //  System.out.println(tno + " " + (file != null ? file.getOriginalFilename() : "No file"));
-//	    //System.out.println("tno" + tno);
-//
-//	    this.millacct.updatemillacceptflag(tno, filename);
-//
-//	    return gson.toJson((Object) tno);
-//	}
 
-
-
-	//@ResponseBody
-		//@RequestMapping(value = { "savemill" }, method = { RequestMethod.POST })
-//		@RequestMapping("savemill")
-//		public String setmillacceptflag(@RequestParam("contract_id") String tno,
-//		                                @RequestParam("Acceptance_doc_path") MultipartFile Acceptance_doc_path,
-//		                                final HttpServletRequest request) throws IllegalStateException, IOException {
-//
-//		    final Gson gson = new Gson();
-//	System.err.println("Acceptance_doc_path___"+Acceptance_doc_path);
-//		    if (Acceptance_doc_path != null && !Acceptance_doc_path.isEmpty()) {
-//		        final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\upload\\millAcceptence");
-//
-//		        if (!theDir.exists()) {
-//		            theDir.mkdirs();
-//		        }
-//
-//		        final String filename = Acceptance_doc_path.getOriginalFilename();
-//		        System.err.println(filename);
-//
-//		        File serverFile = new File(theDir, filename);
-//
-//		        Acceptance_doc_path.transferTo(serverFile);
-//
-//		        millacct.updatemillacceptflag(tno, filename);
-//		    } else {
-//		        // No file selected, handle it accordingly
-//		        String filename = "null";
-//		        millacct.updatemillacceptflag(tno, filename);
-//		    }
-//
-//		    return gson.toJson((Object) tno);
-//		}
-
-		
-
-
-
-
-	
 
 }
