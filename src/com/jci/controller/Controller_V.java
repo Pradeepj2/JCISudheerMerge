@@ -1458,7 +1458,6 @@ public class Controller_V {
 
 //New mill acceptence
 	
-
 	@RequestMapping("viewmillAcc")
 	public String ViewMillAcceptance1(Model model, HttpServletRequest request) {
 		String username = (String) request.getSession().getAttribute("usrname");
@@ -1475,7 +1474,7 @@ public class Controller_V {
 		model.addAttribute("AllList", AllList);
 		return "listMillAcceptence";
 	}
-	
+
 
 	@ResponseBody
 	@RequestMapping(value = { "savemill" }, method = { RequestMethod.POST })
@@ -1509,7 +1508,17 @@ public class Controller_V {
 
 	    return gson.toJson((Object) tno);
 	}
-
+	@ResponseBody
+	@RequestMapping(value = { "s" }, method = { RequestMethod.POST })
+	public String setmillacceptflag1(final HttpServletRequest request  )throws IllegalStateException, IOException  {
+		final Gson gson = new Gson();
+		String contract_no = request.getParameter("contract_id");
+		
+		
+		this.millacct.updatemillflag(contract_no);
+		return gson.toJson((Object) contract_no);
+	}
+//	
 
 
 }

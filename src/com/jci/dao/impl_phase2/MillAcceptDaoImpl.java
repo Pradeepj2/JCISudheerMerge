@@ -158,6 +158,30 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	
+	public void updatemillflag(String contract_no) {
+
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		Date currentDate = new Date();
+		String formattedDate = sdf.format(currentDate);
+		
+		
+		int contractacceptflag =1;	
+		try {
+		String hql = "update jcicontract set Contract_acceptance_flag = '" + contractacceptflag + "', Contract_acceptance_date = '" + formattedDate + "' where contract_id = " + contract_no;
+			//String hql = "update jcicontract set Contract_acceptance_flag = '" + contractacceptflag + "', Contract_acceptance_date = '" + formattedDate +"' where contract_id = " + tno;
+
+				this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
+		      System.out.println("success");
+		} catch (Exception e) {
+			  System.out.println(e.getLocalizedMessage());
+		}
+		// TODO Auto-generated method stub
+		
+	}
 	
 	 
 		

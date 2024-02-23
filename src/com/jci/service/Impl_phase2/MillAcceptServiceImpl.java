@@ -35,4 +35,11 @@ public class MillAcceptServiceImpl implements MillAccept{
 		
 	}
 
+
+	@Override
+	public void updatemillflag(String contract_no) {
+		// TODO Auto-generated method stub
+		millacceptpdao.updatemillflag(contract_no);
+	}
+
 }

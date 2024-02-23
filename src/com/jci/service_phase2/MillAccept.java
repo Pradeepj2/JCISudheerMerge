@@ -13,6 +13,7 @@ public interface MillAccept {
 	public List<JcicontractModel> getAll();
 //	public void updatemillacceptflag(String tno);
 	public void updatemillacceptflag(String tno ,String filename);
+	public void updatemillflag(String contract_no);
 	
 	
 	

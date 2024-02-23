@@ -9,6 +9,7 @@ public interface millAcceptDao {
 
 	public List<JcicontractModel> getAll();
 	public void updatemillacceptflag(String tno ,String filename);
+	public void updatemillflag(String contract_no);
 	
 	
 
