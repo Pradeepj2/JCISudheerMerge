@@ -194,26 +194,8 @@ th {
 											<td>${item.getContract_value()}</td>
 											<td>${item. getPayment_duedate()}</td>
 
-											<%--  <form action="savemill.obj" enctype="multipart/form-data" method="POST">
-											<td>
-											<input type="file" name="Acceptance_doc_path"
-													id="Acceptance_doc_path">
-								<input type="hidden" id="contract_id" name="contract_id" value="${item.contract_id}">
-													</td>
-												<td>
-													<c:choose>
-														<c:when test="${item.contract_acceptance_flag eq '0'}">
-												<button class = "btn btn-danger" type="submit">Accept</button>
-												</c:when>
-												<c:otherwise>
-												<button class= "btn btn-success">Accepted</button>
-												</c:otherwise>
-												</c:choose>
-												</td>
-												
 
-											</form> --%>
-											<form enctype="multipart/form-data">
+											<%--  <form enctype="multipart/form-data">
 											<td>
 											<input type="file" name="Acceptance_doc_path"
 													id="Acceptance_doc_path${item.contract_id}" >
@@ -231,13 +213,27 @@ th {
 												</td>
 												
 
+											</form> --%>
+
+											<form enctype="multipart/form-data">
+												<td><input type="file" name="Acceptance_doc_path"
+													id="Acceptance_doc_path${item.contract_id}">
+													<div id="fileSavedMessage${item.contract_id}"></div>
+													</td>
+												<td><c:choose>
+														<c:when test="${item.contract_acceptance_flag eq '0'}">
+															<button class="btn btn-danger"
+																onclick="upload(${item.contract_id});c(${item.contract_id})">Accept</button>
+														</c:when>
+														<c:otherwise>
+															<button class="btn btn-success">Accepted</button>
+														</c:otherwise>
+													</c:choose></td>											
 											</form>
 
 
-
-									
-											</tr>
-											</c:forEach>
+										</tr>
+									</c:forEach>
 								</tbody>
 
 							</table>
@@ -292,9 +288,8 @@ th {
 			});
 		})
 	</script>
-	
-	
-	 <script>
+
+<script>
 	function upload(contract_id) {
 	   // alert(contract_id);
 
@@ -319,7 +314,84 @@ th {
 
 	    $.ajax({
 	        type: "POST",
+	        url: "savemillfile.obj",
+	        data: formData,
+	        processData: false,
+	        contentType: false, // Add this line to handle file uploads correctly
+
+	        success: function (result) {
+	            var data1 = jQuery.parseJSON(result);
+	            var fileSavedMessage = document.getElementById('fileSavedMessage' + contract_id);
+                fileSavedMessage.innerHTML = 'File Saved!';
+	           // alert("MMMMM");
+	         //   alert(data1);
+
+	        },
+	        error: function (err) {
+	            // Handle errors here
+	            console.error('AJAX request failed: ', err);
+	           // alert("errorrrrrrrrrrr");
+	        },
+	        complete: function () {
+	            // Reload the page after the request is complete (success or error)
+	            window.location.reload();
+	        }
+	    });
+	}
+
+	function c(contract_id) {
+	    alert("cide" + contract_id);
+	    $.ajax({
+	        type: "POST",
 	        url: "savemill.obj",
+	        data: {
+	            "contract_id": contract_id
+	        },
+	        success: function (result) {
+	            var data = jQuery.parseJSON(result);
+	           // alert(data);
+	        },
+	        error: function (err) {
+	            // Handle errors here
+	            console.error('AJAX request failed: ', err);
+	          //  alert("errorrrrrrrrrrr");
+	        },
+	        complete: function () {
+	            // Reload the page after the request is complete (success or error)
+	            window.location.reload();
+	        }
+	    });
+	}
+
+	</script>
+
+
+	<!-- <script>
+	function upload(contract_id) {
+	   // alert(contract_id);
+
+	    var fileInput = document.getElementById('Acceptance_doc_path' + contract_id);
+	    var file = fileInput.files[0];
+
+	    var formData = new FormData();
+	    formData.append('contract_id', contract_id);
+
+	    // Check if a file is selected before appending to formData
+	    if (file) {
+	        formData.append('Acceptance_doc_path', file);
+	       // alert(file.name + " selected");
+	    } else {
+	        formData.append('Acceptance_doc_path', null);
+	       // alert("No file selected" + formData.get('Acceptance_doc_path'));
+
+	        // Call the 'c' function when no file is selected
+	        c(contract_id);
+	        return; // Exit the function to avoid further execution
+	    }
+
+	    $.ajax({
+	        type: "POST",
+	        url: "savemillfile.obj",
 	        data: formData,
 	        processData: false,
 	        contentType: false, // Add this line to handle file uploads correctly
@@ -346,7 +418,7 @@ th {
 	    alert("cide" + contract_id);
 	    $.ajax({
 	        type: "POST",
-	        url: "s.obj",
+	        url: "savemill.obj",
 	        data: {
 	            "contract_id": contract_id
 	        },
@@ -367,9 +439,7 @@ th {
 	}
 
 	</script>
-
-
-
+ -->
 
 
 

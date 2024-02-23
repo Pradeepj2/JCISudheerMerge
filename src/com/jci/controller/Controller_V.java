@@ -1477,11 +1477,11 @@ public class Controller_V {
 
 
 	@ResponseBody
-	@RequestMapping(value = { "savemill" }, method = { RequestMethod.POST })
+	@RequestMapping(value = { "savemillfile" }, method = { RequestMethod.POST })
 	
 	public String setmillacceptflag(@RequestParam("contract_id") String tno,
 	                                @RequestParam("Acceptance_doc_path") MultipartFile Acceptance_doc_path,
-	                                final HttpServletRequest request) throws IllegalStateException, IOException {
+	                                final HttpServletRequest request ) throws IllegalStateException, IOException {
 
 	    final Gson gson = new Gson();
         System.err.println("Acceptance_doc_path___"+Acceptance_doc_path);
@@ -1500,6 +1500,7 @@ public class Controller_V {
 	        Acceptance_doc_path.transferTo(serverFile);
 
 	        millacct.updatemillacceptflag(tno, filename);
+	       
 	    } else {
 	        // No file selected, handle it accordingly
 	        String filename = "null";
@@ -1509,7 +1510,7 @@ public class Controller_V {
 	    return gson.toJson((Object) tno);
 	}
 	@ResponseBody
-	@RequestMapping(value = { "s" }, method = { RequestMethod.POST })
+	@RequestMapping(value = { "savemill" }, method = { RequestMethod.POST })
 	public String setmillacceptflag1(final HttpServletRequest request  )throws IllegalStateException, IOException  {
 		final Gson gson = new Gson();
 		String contract_no = request.getParameter("contract_id");
