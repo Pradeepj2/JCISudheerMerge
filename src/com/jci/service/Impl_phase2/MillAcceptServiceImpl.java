@@ -22,24 +22,15 @@ public class MillAcceptServiceImpl implements MillAccept{
 	
 	
 	@Override
-	public void updatemillacceptflag(String tno ,String filename) {
+	public void updatemillacceptflag(String contractId ,String filename) {
 		
-		millacceptpdao.updatemillacceptflag(tno , filename);
+		millacceptpdao.updatemillacceptflag(contractId , filename);
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
-	public void create(JcicontractModel millAccept1) {
-		millacceptpdao.create(millAccept1);
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
-	@Override
-	public void updatemillflag(String contract_no) {
-		// TODO Auto-generated method stub
-		millacceptpdao.updatemillflag(contract_no);
-	}
+
 
 }

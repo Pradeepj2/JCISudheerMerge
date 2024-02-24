@@ -9,11 +9,9 @@ import com.jci.model.JcicontractModel;
 
 
 public interface MillAccept {
-	public void create(JcicontractModel millAccept1);
+	
 	public List<JcicontractModel> getAll();
-//	public void updatemillacceptflag(String tno);
-	public void updatemillacceptflag(String tno ,String filename);
-	public void updatemillflag(String contract_no);
+	public void updatemillacceptflag(String contractId ,String filename);
 	
 	
 	

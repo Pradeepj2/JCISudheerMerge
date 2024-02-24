@@ -5,11 +5,8 @@ import java.util.List;
 import com.jci.model.JcicontractModel;
 
 public interface millAcceptDao {
-	public void create(JcicontractModel millAccept1);
-
 	public List<JcicontractModel> getAll();
-	public void updatemillacceptflag(String tno ,String filename);
-	public void updatemillflag(String contract_no);
+	public void updatemillacceptflag(String contractId ,String filename);
 	
 	
 

@@ -114,7 +114,7 @@
 											<label>Supporting Document</label> <input
 												class="form-control textbox" name="SupportingDocument"
 												id="SupportingDocument" type="file"
-												placeholder="DI No & Date" required>
+											  required>
 										</div>
 
 

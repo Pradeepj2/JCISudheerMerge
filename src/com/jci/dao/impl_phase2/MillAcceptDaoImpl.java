@@ -54,38 +54,7 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 	}
 	
 	
-	@Override
-	public void create(JcicontractModel millAccept1) {
-		System.err.println("before" );
-		System.err.println(millAccept1 + "millaccept");
-        System.err.println(currentSession().save(millAccept1)+"save");
-        currentSession().save(millAccept1);
-//         Transaction transaction = currentSession().beginTransaction();
-//         currentSession().save(millAccept1);
-//         transaction.commit();
-//
-//         return;
-		
-//		 String hql = "INSERT INTO Jcicontract (Acceptance_doc_path) VALUES (:acceptanceDocPath)";
-//		    
-//		    Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
-//		    query.setParameter("acceptanceDocPath", millAccept1.getAcceptance_doc_path());
-//
-//		    query.executeUpdate();
-	    
-	    
-//		String hql = "INSERT INTO Jcicontract (Acceptance_doc_path) VALUES (:acceptanceDocPath)";
-//	    
-//	    Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
-//	    query.setParameter("acceptanceDocPath", millAccept1.getAcceptance_doc_path());
-//
-//	    query.executeUpdate();
-
-		// currentSession().save(millAccept1);
-        // currentSession().saveOrUpdate(millAccept1);
-		// return;
-		//System.out.println("afetr");
-	}
+	
 		
 	@Override
 	public List<JcicontractModel> getAll() {
@@ -136,7 +105,7 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 	
 	
 	@Override
-	public void updatemillacceptflag(String tno ,String filename) {
+	public void updatemillacceptflag(String contractId ,String filename) {
 		String Acceptence_doc = filename;
 		System.err.println("Acceptence_doc" +Acceptence_doc);
 		
@@ -147,8 +116,7 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 		
 		int contractacceptflag =1;	
 		try {
-		String hql = "update jcicontract set Contract_acceptance_flag = '" + contractacceptflag + "', Contract_acceptance_date = '" + formattedDate + "',Acceptance_doc_path ='"+ Acceptence_doc +"' where contract_id = " + tno;
-			//String hql = "update jcicontract set Contract_acceptance_flag = '" + contractacceptflag + "', Contract_acceptance_date = '" + formattedDate +"' where contract_id = " + tno;
+		String hql = "update jcicontract set Contract_acceptance_flag = '" + contractacceptflag + "', Contract_acceptance_date = '" + formattedDate + "',Acceptance_doc_path ='"+ Acceptence_doc +"' where contract_id = " + contractId;
 
 				this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
 		      System.out.println("success");
@@ -161,27 +129,7 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 
 
 	
-	public void updatemillflag(String contract_no) {
 
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-		Date currentDate = new Date();
-		String formattedDate = sdf.format(currentDate);
-		
-		
-		int contractacceptflag =1;	
-		try {
-		String hql = "update jcicontract set Contract_acceptance_flag = '" + contractacceptflag + "', Contract_acceptance_date = '" + formattedDate + "' where contract_id = " + contract_no;
-			//String hql = "update jcicontract set Contract_acceptance_flag = '" + contractacceptflag + "', Contract_acceptance_date = '" + formattedDate +"' where contract_id = " + tno;
-
-				this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
-		      System.out.println("success");
-		} catch (Exception e) {
-			  System.out.println(e.getLocalizedMessage());
-		}
-		// TODO Auto-generated method stub
-		
-	}
 	
 	 
 		
