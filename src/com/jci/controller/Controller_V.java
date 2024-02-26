@@ -1503,13 +1503,13 @@ public class Controller_V {
 		Acceptance_doc_path.transferTo(serverFile);
 		 millacct.updatemillacceptflag(contractId, filename);
 		 redirectAttributes.addFlashAttribute("msg",
-					(Object) "<div class=\"alert alert-success\"><b>Success !</b>  Contract Accepted and File Uploaded Succesfully!</div>\r\n");
+					(Object) "<div class=\"alert alert-success\"><b>Success !</b>  Contract Accepted and File Uploaded Succesfully.</div>\r\n");
 		}
 		else {
-			String filename1 = "null";
+			String filename1 = "No File Selected";
 			 millacct.updatemillacceptflag(contractId, filename1);
 			 redirectAttributes.addFlashAttribute("msg",
-						(Object) "<div class=\"alert alert-success\"><b>Success !</b> Contract Accepted!.</div>\r\n");
+						(Object) "<div class=\"alert alert-success\"><b>Success !</b> Contract Accepted.</div>\r\n");
 			 
 		}
 		

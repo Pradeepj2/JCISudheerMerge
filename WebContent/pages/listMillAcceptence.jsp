@@ -90,15 +90,28 @@ th {
 	background: #eee;
 }
 </style>
+<style>
+   input[type="file"] {
+  color: transparent;
+}  
 
+ /* input[type="file"]::before {
+  content: "Select File";
+  color: #333; /* Set your desired text color */
+} */
+ input[type="file"]:hover::before {
+  color: #555; /* Set your desired text color on hover */
+} 
+ 
+</style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-function f()
-{
+	function f() {
 
-	 window.location.reload();
+		window.location.reload();
 
-}</script>
+	}
+</script>
 
 
 
@@ -159,6 +172,8 @@ function f()
 											<td>${item.getContract_date()}</td>
 											<td>${item.getContract_qty()}</td>
 											<td>${item.getContract_value()}</td>
+											<td></td>
+
 											<td>${item. getPayment_duedate()}</td>
 
 
@@ -179,7 +194,7 @@ function f()
 														</c:otherwise>
 													</c:choose></td>											
 											</form> --%>
-											<form action="saveMillAcceptenceFile.obj" method="POST" enctype="multipart/form-data">
+											<%--  <form action="saveMillAcceptenceFile.obj" method="POST" enctype="multipart/form-data">
 												<td><input type="file" name="Acceptance_doc_path"
 													id="Acceptance_doc_path">
 													<input type = "hidden" value= "${item.contract_id}"  name ="contract_id">
@@ -194,7 +209,30 @@ function f()
 														</c:otherwise>
 													</c:choose></td>
 
+											</form> --%>
+											<form action="saveMillAcceptenceFile.obj" method="POST" enctype="multipart/form-data">
+												<td>
+												<input type="file" name="Acceptance_doc_path"
+													id="Acceptance_doc_path">
+													<br>
+													${item.getAcceptance_doc_path()}
+												
+													<input type = "hidden" value= "${item.contract_id}"  name ="contract_id">
+													
+												<td><c:choose>
+														<c:when test="${item.contract_acceptance_flag eq '0'}">
+														
+															<button class="btn btn-danger"  type="submit">Accept</button>
+														</c:when>
+														<c:otherwise>
+															<button class="btn btn-success">Accepted</button>
+														</c:otherwise>
+													</c:choose></td>
+
 											</form>
+											
+
+
 
 
 
@@ -255,7 +293,7 @@ function f()
 		})
 	</script>
 
-	
+
 
 
 
