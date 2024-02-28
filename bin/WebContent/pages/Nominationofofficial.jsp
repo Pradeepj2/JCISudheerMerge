@@ -15,6 +15,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width initial-scale=1.0">
 <title>JCI | CMS</title>
+
 <!-- GLOBAL MAINLY STYLES-->
 <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet" />
@@ -62,7 +63,7 @@
    
 </style>
 </head>
-<body class="fixed-navbar" onload="myFunction()">
+<body class="fixed-navbar">
 	<div class="page-wrapper">
 		<!-- START HEADER-->
 		<%@ include file="header.jsp"%>

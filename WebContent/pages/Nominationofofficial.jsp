@@ -6,6 +6,7 @@
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +16,7 @@
 <meta name="viewport" content="width=device-width initial-scale=1.0">
 <title>JCI | CMS</title>
 
- 
+
 
 
 <!-- GLOBAL MAINLY STYLES-->
@@ -33,7 +34,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+ <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script
@@ -45,6 +46,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- CORE SCRIPTS-->
+
+
 <style>
 .required:after {
 	content: " *";
@@ -65,14 +68,16 @@
    
 </style>
 </head>
-<body class="fixed-navbar" onload="myFunction()">
+ <body class="fixed-navbar">
 	<div class="page-wrapper">
-		<!-- START HEADER-->
+		<!-- START HEADER-->		
 		<%@ include file="header.jsp"%>
 		<!-- END HEADER-->
 		<!-- START SIDEBAR-->
-		<%@ include file="sidebar.jsp"%>
-		<!-- END SIDEBAR-->
+			<%@ include file="sidebar.jsp"%>
+		
+		<!-- END SIDEBAR--> 
+		
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
 			<div class="page-heading">
@@ -360,8 +365,8 @@
 
 	<div class="sidenav-backdrop backdrop"></div>
 
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css"> 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
  <script>
@@ -555,16 +560,15 @@
 
 	<!--   For Hinding and Showing the  Grade Wise Alloction-->
 
-
 	<script type="text/javascript">
 		$(document).ready(function() {
 			// Add an event listener for the change event on the dropdown
-
+/* 
 			$('.input-container').hide();
 
 			$('span').hide();
-
-			$('#ContractNo').on('change', function() {
+ */
+		/* 	$('#ContractNo').on('change', function() {
 				// Get the selected option value
 				var selectedOption = $(this).val();
 				if (selectedOption != '') {
@@ -575,7 +579,7 @@
 
 				}
 
-			});
+			}); */
 		});
 	</script>
 

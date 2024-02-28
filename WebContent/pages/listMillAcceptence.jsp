@@ -9,6 +9,8 @@
 
 <%@page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -100,6 +102,7 @@ input[type="file"] {
   color: #333; /* Set your desired text color */
 }
 * /
+
  input[type="file"]:hover::before {
 	color: #555; /* Set your desired text color on hover */
 }
@@ -180,30 +183,44 @@ input[type="file"] {
 											<%-- <td>${item. getPayment_duedate()}</td> --%>
 											<form action="saveMillAcceptenceFile.obj" method="POST"
 												enctype="multipart/form-data">
+												<td><c:choose>
+														<c:when test="${item.getContract_value_lc() != 0.0}">
+															<div class="col-sm-10 form-group">
+																<input class="form-control taxtbox"
+																	value="${item.getContract_value_lc()}"
+																	id="Contract_value_lc" name="Contract_value_lc"
+																	type="number" readonly="readonly">
+															</div>
+														</c:when>
+														<c:otherwise>
+															<div class="col-sm-10 form-group">
+																<input class="form-control taxtbox"
+																	value="${item.getContract_value_lc()}"
+																	id="Contract_value_lc" name="Contract_value_lc"
+																	type="number" step="any">
+															</div>
+														</c:otherwise>
+													</c:choose></td>
 												<td>
-													<div class="col-sm-10 form-group">
-														<input class="form-control taxtbox" value ="${item.getContract_value_lc()}"  id ="Contract_value_lc" name = "Contract_value_lc" type="number" step="any" >
-														
-													</div>
-
-												</td>
-												<td><input type="file" name="Acceptance_doc_path"
-													id="Acceptance_doc_path"> <br>
-													${item.getAcceptance_doc_path()} 
-													<input type="hidden"
-													value="${item.contract_id}" name="contract_id"></td>
+												
+												<input  type="file"
+													value="${item.getAcceptance_doc_path()}"
+													name="Acceptance_doc_path" id="Acceptance_doc_path">
+													<br> ${item.getAcceptance_doc_path()}
+													</td>
+													
+													 <input
+													type="hidden" value="${item.contract_id}"
+													name="contract_id">
 												<td><c:choose>
 														<c:when test="${item.contract_acceptance_flag eq '0'}">
-
 															<button class="btn btn-danger" type="submit">Accept</button>
 														</c:when>
 														<c:otherwise>
 															<button class="btn btn-success">Accepted</button>
 														</c:otherwise>
 													</c:choose></td>
-													
 											</form>
-
 										</tr>
 									</c:forEach>
 								</tbody>
