@@ -45,6 +45,8 @@ public class Jciclaim_NominationModel {
 	private double Moisture_settlement;
 	
 	
+	
+	
 	@Column(name = "Ncv_settlement")
 	private double Ncv_settlement;
 
@@ -347,6 +349,7 @@ public class Jciclaim_NominationModel {
 		Created_on = created_on;
 	}
 
+	
 
 
 	

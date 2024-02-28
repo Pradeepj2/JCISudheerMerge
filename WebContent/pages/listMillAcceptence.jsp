@@ -91,18 +91,18 @@ th {
 }
 </style>
 <style>
-   input[type="file"] {
-  color: transparent;
-}  
+input[type="file"] {
+	color: transparent;
+}
 
- /* input[type="file"]::before {
+/* input[type="file"]::before {
   content: "Select File";
   color: #333; /* Set your desired text color */
-} */
+}
+* /
  input[type="file"]:hover::before {
-  color: #555; /* Set your desired text color on hover */
-} 
- 
+	color: #555; /* Set your desired text color on hover */
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
@@ -149,9 +149,10 @@ th {
 										<th>Contract No.</th>
 										<th>Contract Date</th>
 										<th>Quantity</th>
+										<th>Payment Due Date</th>
 										<th>Contract Value Online</th>
 										<th>Contract Value LC</th>
-										<th>Payment Due Date</th>
+										<!-- <th>Payment Due Date</th> -->
 										<th>Upload Signed Doc</th>
 										<th>Action</th>
 
@@ -171,70 +172,37 @@ th {
 											<td>${item.getContract_no()}</td>
 											<td>${item.getContract_date()}</td>
 											<td>${item.getContract_qty()}</td>
-											<td>${item.getContract_value()}</td>
-											<td></td>
-
 											<td>${item. getPayment_duedate()}</td>
+											<td>${item.getContract_value()}</td>
 
 
 
-											<%--<form enctype="multipart/form-data">
-											
-												<td><input type="file" name="Acceptance_doc_path"
-													id="Acceptance_doc_path${item.contract_id}">
-													<div id="fileSavedMessage${item.contract_id}"></div>
-													</td>
-												<td><c:choose>
-														<c:when test="${item.contract_acceptance_flag eq '0'}">
-															<button class="btn btn-danger"
-																onclick="upload(${item.contract_id});c(${item.contract_id})">Accept</button>
-														</c:when>
-														<c:otherwise>
-															<button class="btn btn-success">Accepted</button>
-														</c:otherwise>
-													</c:choose></td>											
-											</form> --%>
-											<%--  <form action="saveMillAcceptenceFile.obj" method="POST" enctype="multipart/form-data">
-												<td><input type="file" name="Acceptance_doc_path"
-													id="Acceptance_doc_path">
-													<input type = "hidden" value= "${item.contract_id}"  name ="contract_id">
-													
-												<td><c:choose>
-														<c:when test="${item.contract_acceptance_flag eq '0'}">
-														
-															<button class="btn btn-danger"  type="submit">Accept</button>
-														</c:when>
-														<c:otherwise>
-															<button class="btn btn-success">Accepted</button>
-														</c:otherwise>
-													</c:choose></td>
-
-											</form> --%>
-											<form action="saveMillAcceptenceFile.obj" method="POST" enctype="multipart/form-data">
+											<%-- <td>${item. getPayment_duedate()}</td> --%>
+											<form action="saveMillAcceptenceFile.obj" method="POST"
+												enctype="multipart/form-data">
 												<td>
-												<input type="file" name="Acceptance_doc_path"
-													id="Acceptance_doc_path">
-													<br>
-													${item.getAcceptance_doc_path()}
-												
-													<input type = "hidden" value= "${item.contract_id}"  name ="contract_id">
-													
+													<div class="col-sm-10 form-group">
+														<input class="form-control taxtbox" value ="${item.getContract_value_lc()}"  id ="Contract_value_lc" name = "Contract_value_lc" type="number" step="any" >
+														
+													</div>
+
+												</td>
+												<td><input type="file" name="Acceptance_doc_path"
+													id="Acceptance_doc_path"> <br>
+													${item.getAcceptance_doc_path()} 
+													<input type="hidden"
+													value="${item.contract_id}" name="contract_id"></td>
 												<td><c:choose>
 														<c:when test="${item.contract_acceptance_flag eq '0'}">
-														
-															<button class="btn btn-danger"  type="submit">Accept</button>
+
+															<button class="btn btn-danger" type="submit">Accept</button>
 														</c:when>
 														<c:otherwise>
 															<button class="btn btn-success">Accepted</button>
 														</c:otherwise>
 													</c:choose></td>
-
+													
 											</form>
-											
-
-
-
-
 
 										</tr>
 									</c:forEach>

@@ -1482,7 +1482,9 @@ public class Controller_V {
 			throws IllegalStateException, IOException {
 
         String  contractId= request.getParameter("contract_id"); 
-     
+       // Double Contract_value_lc =request.getParameter("Contract_value_lc");
+        Double Contract_value_lc = (Double) Double.parseDouble(request.getParameter("Contract_value_lc"));
+     System.out.println(Contract_value_lc + "Contract_value_lc");
       
 		final String filename = Acceptance_doc_path.getOriginalFilename();
 		
@@ -1501,13 +1503,13 @@ public class Controller_V {
 		File serverFile = new File(theDir, filename);
 
 		Acceptance_doc_path.transferTo(serverFile);
-		 millacct.updatemillacceptflag(contractId, filename);
+		 millacct.updatemillacceptflag(contractId, filename, Contract_value_lc);
 		 redirectAttributes.addFlashAttribute("msg",
 					(Object) "<div class=\"alert alert-success\"><b>Success !</b>  Contract Accepted and File Uploaded Succesfully.</div>\r\n");
 		}
 		else {
 			String filename1 = "No File Selected";
-			 millacct.updatemillacceptflag(contractId, filename1);
+			 millacct.updatemillacceptflag(contractId, filename1, Contract_value_lc);
 			 redirectAttributes.addFlashAttribute("msg",
 						(Object) "<div class=\"alert alert-success\"><b>Success !</b> Contract Accepted.</div>\r\n");
 			 

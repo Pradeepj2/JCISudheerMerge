@@ -90,6 +90,9 @@ public class JcicontractModel {
 	
 	@Column(name = "Acceptance_doc_path",length = 250)
 	private String Acceptance_doc_path;
+	
+	@Column(name="Contract_value_lc" ,  columnDefinition = "DOUBLE  DEFAULT 0.0")
+	private double Contract_value_lc;
 
 	public Long getContract_id() {
 		return contract_id;
@@ -284,7 +287,14 @@ public class JcicontractModel {
 		Acceptance_doc_path = acceptance_doc_path;
 	}
 
-	
+	public double getContract_value_lc() {
+		return Contract_value_lc;
+	}
+
+	public void setContract_value_lc(double contract_value_lc) {
+		Contract_value_lc = contract_value_lc;
+	}
+
 	@Override
 	public String toString() {
 		return "JcicontractModel [contract_id=" + contract_id + ", Pcso_date=" + Pcso_date
@@ -298,9 +308,36 @@ public class JcicontractModel {
 				+ ", Contract_acceptance_doc=" + Contract_acceptance_doc + ", Intial_Payment_date="
 				+ Intial_Payment_date + ", Intial_Payment_flag=" + Intial_Payment_flag + ", Contract_status="
 				+ Contract_status + ", Created_date=" + Created_date + ", Created_by=" + Created_by
-				+ ", Acceptance_doc_path=" + Acceptance_doc_path + "]";
+				+ ", Acceptance_doc_path=" + Acceptance_doc_path + ", Contract_value_lc=" + Contract_value_lc + "]";
 	}
-//	
+
+	
+	
+//	public double getContract_value_lc() {
+//		return Contract_value_lc;
+//	}
+//
+//	public void setContract_value_lc(double contract_value_lc) {
+//		Contract_value_lc = contract_value_lc;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "JcicontractModel [contract_id=" + contract_id + ", Pcso_date=" + Pcso_date
+//				+ ", Contract_identification_no=" + Contract_identification_no + ", Contract_no=" + Contract_no
+//				+ ", Contract_date=" + Contract_date + ", Contract_qty=" + Contract_qty + ", Contract_value="
+//				+ Contract_value + ", Mill_code=" + Mill_code + ", Mill_name=" + Mill_name + ", Mill_qty=" + Mill_qty
+//				+ ", Delivery_type=" + Delivery_type + ", Grade_composition_id=" + Grade_composition_id
+//				+ ", Payment_duedate=" + Payment_duedate + ", Contract_cancellation_flag=" + Contract_cancellation_flag
+//				+ ", Contract_cancel_date=" + Contract_cancel_date + ", Contract_acceptance_flag="
+//				+ Contract_acceptance_flag + ", Contract_acceptance_date=" + Contract_acceptance_date
+//				+ ", Contract_acceptance_doc=" + Contract_acceptance_doc + ", Intial_Payment_date="
+//				+ Intial_Payment_date + ", Intial_Payment_flag=" + Intial_Payment_flag + ", Contract_status="
+//				+ Contract_status + ", Created_date=" + Created_date + ", Created_by=" + Created_by
+//				+ ", Acceptance_doc_path=" + Acceptance_doc_path + ", Contract_value_lc=" + Contract_value_lc + "]";
+//	}
+	
+
 
 	
 	
