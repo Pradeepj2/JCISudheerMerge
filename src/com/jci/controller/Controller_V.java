@@ -1481,9 +1481,7 @@ public class Controller_V {
 			throws IllegalStateException, IOException {
 
         String  contractId= request.getParameter("contract_id"); 
-       // Double Contract_value_lc =request.getParameter("Contract_value_lc");
         Double Contract_value_lc = (Double) Double.parseDouble(request.getParameter("Contract_value_lc"));
-     System.out.println(Contract_value_lc + "Contract_value_lc");
       
 		final String filename = Acceptance_doc_path.getOriginalFilename();
 		

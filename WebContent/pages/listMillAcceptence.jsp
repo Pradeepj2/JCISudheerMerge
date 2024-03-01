@@ -202,22 +202,21 @@ input[type="file"] {
 														</c:otherwise>
 													</c:choose></td>
 												<td>
+												<input  type="file" value="${item.getAcceptance_doc_path()}"										
+												name="Acceptance_doc_path" id="Acceptance_doc_path" >
+												<br> ${item.getAcceptance_doc_path()} 
 												
-												<input  type="file"
-													value="${item.getAcceptance_doc_path()}"
-													name="Acceptance_doc_path" id="Acceptance_doc_path">
-													<br> ${item.getAcceptance_doc_path()}
-													</td>
-													
-													 <input
-													type="hidden" value="${item.contract_id}"
-													name="contract_id">
+																						
+												</td> 
+												<input type="hidden" value="${item.contract_id}"
+													name="contract_id" >
 												<td><c:choose>
 														<c:when test="${item.contract_acceptance_flag eq '0'}">
-															<button class="btn btn-danger" type="submit">Accept</button>
+															<button class="btn btn-danger" style="width: 60px"
+																type="submit">Accept</button>
 														</c:when>
 														<c:otherwise>
-															<button class="btn btn-success">Accepted</button>
+															<button class="btn btn-success" disabled>Accepted</button>
 														</c:otherwise>
 													</c:choose></td>
 											</form>
