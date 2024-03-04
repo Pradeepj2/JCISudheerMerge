@@ -60,7 +60,7 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 	public List<JcicontractModel> getAll() {
 	    List<JcicontractModel> ll = new ArrayList<>();
 	    List<Object[]> rows = new ArrayList<>();
-	    String querystr = "select Contract_no, Contract_date, Contract_qty, Contract_value, Payment_duedate, Contract_acceptance_flag, contract_id,Delivery_type ,Mill_name, Contract_acceptance_doc, Acceptance_doc_path, Contract_value_lc   from jcicontract";
+	    String querystr = "select Contract_no, Contract_date, Contract_qty, Contract_value, Payment_duedate, Contract_acceptance_flag, contract_id,Delivery_type ,Mill_name, Contract_acceptance_doc, Acceptance_doc_path,CropYear   from jcicontract";
 	  //  String querystr = "select Contract_no, Contract_date, Contract_qty, Contract_value, Payment_duedate, Contract_acceptance_flag, contract_id,Delivery_type ,Mill_name, Contract_acceptance_doc, Acceptance_doc_path  from jcicontract";
 	    
 	    Session session = sessionFactory.getCurrentSession();
@@ -81,7 +81,8 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 	       String Mill_name=(String)row[8];
 	       String Contract_acceptance_doc=(String)row[9];
 	       String Acceptance_doc_path= (String)row[10];
-	      Double Contract_value_lc =(Double) row[11];
+	      //Double Contract_value_lc =(Double) row[11];
+	      String CropYear =(String)row[11];
 	        
 
 	        JcicontractModel cm = new JcicontractModel();
@@ -96,7 +97,8 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 	        cm.setMill_name(Mill_name);
 	        cm.setContract_acceptance_doc(Contract_acceptance_doc);
 	        cm.setAcceptance_doc_path(Acceptance_doc_path);
-	        cm.setContract_value_lc(Contract_value_lc);
+	      //  cm.setContract_value_lc(Contract_value_lc);
+	        cm.setCropYear(CropYear);
 	        
 
 	        ll.add(cm);
@@ -109,11 +111,35 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 
 	
 	
+//	@Override
+//	public void updatemillacceptflag(String contractId ,String filename , Double Contract_value_lc) {
+//		Double Contract_value_letterOfCredit = Contract_value_lc;
+//		String Acceptence_doc = filename;
+//		System.err.println("Acceptence_doc" +Acceptence_doc);
+//		
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+//		Date currentDate = new Date();
+//		String formattedDate = sdf.format(currentDate);
+//		
+//		
+//		int contractacceptflag =1;	
+//		String Contract_status = "Mill Accepted";
+//		try {
+//		String hql = "update jcicontract set Contract_acceptance_flag = '" + contractacceptflag + "', Contract_acceptance_date = '" + formattedDate + "',Acceptance_doc_path ='"+ Acceptence_doc +"',Contract_status = '" + Contract_status +"',Contract_value_lc = '"+ Contract_value_letterOfCredit +"'  where contract_id = " + contractId;
+//
+//				this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
+//		      System.out.println("success");
+//		} catch (Exception e) {
+//			  System.out.println(e.getLocalizedMessage());
+//		}
+//		// TODO Auto-generated method stub
+//		
+//	}
+
+
 	@Override
-	public void updatemillacceptflag(String contractId ,String filename , Double Contract_value_lc) {
-		Double Contract_value_letterOfCredit = Contract_value_lc;
-		String Acceptence_doc = filename;
-		System.err.println("Acceptence_doc" +Acceptence_doc);
+	public void updatemillacceptflag(String contractId ) {
+		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date currentDate = new Date();
@@ -123,7 +149,7 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 		int contractacceptflag =1;	
 		String Contract_status = "Mill Accepted";
 		try {
-		String hql = "update jcicontract set Contract_acceptance_flag = '" + contractacceptflag + "', Contract_acceptance_date = '" + formattedDate + "',Acceptance_doc_path ='"+ Acceptence_doc +"',Contract_status = '" + Contract_status +"',Contract_value_lc = '"+ Contract_value_letterOfCredit +"'  where contract_id = " + contractId;
+		String hql = "update jcicontract set Contract_acceptance_flag = '" + contractacceptflag + "', Contract_acceptance_date = '" + formattedDate + "',Contract_status = '" + Contract_status +"'  where contract_id = " + contractId;
 
 				this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
 		      System.out.println("success");
@@ -134,8 +160,6 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 		
 	}
 
-
-	
 
 	
 	 

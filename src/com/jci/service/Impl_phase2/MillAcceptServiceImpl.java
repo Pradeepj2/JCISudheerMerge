@@ -21,10 +21,18 @@ public class MillAcceptServiceImpl implements MillAccept{
 	}
 	
 	
+//	@Override
+//	public void updatemillacceptflag(String contractId ,String filename , Double Contract_value_lc) {
+//		
+//		millacceptpdao.updatemillacceptflag(contractId , filename, Contract_value_lc);
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	
 	@Override
-	public void updatemillacceptflag(String contractId ,String filename , Double Contract_value_lc) {
+	public void updatemillacceptflag(String contractId ) {
 		
-		millacceptpdao.updatemillacceptflag(contractId , filename, Contract_value_lc);
+		millacceptpdao.updatemillacceptflag(contractId );
 		// TODO Auto-generated method stub
 		
 	}

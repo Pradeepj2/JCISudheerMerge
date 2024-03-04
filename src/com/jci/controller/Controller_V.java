@@ -1317,8 +1317,7 @@ public class Controller_V {
 
 	}
 
-	// For Downloading the Entry of Tds Document
-	// for Downloading the Uploaded Document
+	
 
 	@RequestMapping("downloadSupportingDocumententrytds")
 
@@ -1475,46 +1474,155 @@ public class Controller_V {
 	}
 
 	
+//	@RequestMapping("saveMillAcceptenceFile")
+//	public ModelAndView millaccept(HttpServletRequest request, RedirectAttributes redirectAttributes,
+//			@RequestParam("Acceptance_doc_path") final MultipartFile Acceptance_doc_path, HttpSession s)
+//			throws IllegalStateException, IOException {
+//
+//        String  contractId= request.getParameter("contract_id"); 
+//        Double Contract_value_lc = (Double) Double.parseDouble(request.getParameter("Contract_value_lc"));
+//      
+//		final String filename = Acceptance_doc_path.getOriginalFilename();
+//		
+//		System.err.println("filename" + filename);
+//		if(filename != "") {
+//		 
+//		final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\mill\\upload");
+//
+//		if (!theDir.exists()) {
+//
+//			theDir.mkdirs();
+//
+//		}
+//
+//
+//		File serverFile = new File(theDir, filename);
+//
+//		Acceptance_doc_path.transferTo(serverFile);
+//		 millacct.updatemillacceptflag(contractId, filename, Contract_value_lc);
+//		 redirectAttributes.addFlashAttribute("msg",
+//					(Object) "<div class=\"alert alert-success\"><b>Success !</b>  Contract Accepted and File Uploaded Succesfully.</div>\r\n");
+//		}
+//		else {
+//			String filename1 = "No File Selected";
+//			 millacct.updatemillacceptflag(contractId, filename1, Contract_value_lc);
+//			 redirectAttributes.addFlashAttribute("msg",
+//						(Object) "<div class=\"alert alert-success\"><b>Success !</b> Contract Accepted.</div>\r\n");
+//			 
+//		}
+//		
+//		
+//
+//		return new ModelAndView(new RedirectView("viewmillAcc.obj"));
+//
+//	}
 	@RequestMapping("saveMillAcceptenceFile")
 	public ModelAndView millaccept(HttpServletRequest request, RedirectAttributes redirectAttributes,
-			@RequestParam("Acceptance_doc_path") final MultipartFile Acceptance_doc_path, HttpSession s)
+			 HttpSession s)
 			throws IllegalStateException, IOException {
 
         String  contractId= request.getParameter("contract_id"); 
-        Double Contract_value_lc = (Double) Double.parseDouble(request.getParameter("Contract_value_lc"));
-      
-		final String filename = Acceptance_doc_path.getOriginalFilename();
-		
-		System.err.println("filename" + filename);
-		if(filename != "") {
-		 
-		final File theDir = new File("C:\\Users\\Mansi.Gupta\\Downloads\\mill\\upload");
-
-		if (!theDir.exists()) {
-
-			theDir.mkdirs();
-
-		}
-
-
-		File serverFile = new File(theDir, filename);
-
-		Acceptance_doc_path.transferTo(serverFile);
-		 millacct.updatemillacceptflag(contractId, filename, Contract_value_lc);
+    
+        millacct.updatemillacceptflag(contractId);
 		 redirectAttributes.addFlashAttribute("msg",
-					(Object) "<div class=\"alert alert-success\"><b>Success !</b>  Contract Accepted and File Uploaded Succesfully.</div>\r\n");
-		}
-		else {
-			String filename1 = "No File Selected";
-			 millacct.updatemillacceptflag(contractId, filename1, Contract_value_lc);
-			 redirectAttributes.addFlashAttribute("msg",
-						(Object) "<div class=\"alert alert-success\"><b>Success !</b> Contract Accepted.</div>\r\n");
-			 
-		}
+					(Object) "<div class=\"alert alert-success\"><b>Success !</b> Contract Accepted.</div>\r\n");
 		
 		
 
 		return new ModelAndView(new RedirectView("viewmillAcc.obj"));
+
+	}
+	@RequestMapping("downloadSupportingDocumententMillAccept")
+
+	public void downloadDocument(@RequestParam("filename") String filename, HttpServletResponse response) {
+
+		String imageDirectory = "C:\\Users\\Mansi.Gupta\\Documents\\millAcceptFile"; // Replace with your image
+																						// directory path
+
+		String imagePath = imageDirectory + File.separator + filename;
+
+		File imageFile = new File(imagePath);
+
+		// Check if the file exists
+
+		if (imageFile.exists()) {
+
+			try {
+
+				// Set the content type based on the file type
+
+				String contentType = determineContentType(filename);
+
+				response.setContentType(contentType);
+
+				// Set the content length and attachment disposition
+
+				response.setContentLength((int) imageFile.length());
+
+				// response.setHeader("Content-Disposition", "attachment; filename=" +
+				// filename);
+
+				response.setHeader("Content-Disposition", "");
+
+				// Stream the file content to the response
+
+				FileInputStream fileInputStream = new FileInputStream(imageFile);
+
+				OutputStream responseOutputStream = response.getOutputStream();
+
+				byte[] buffer = new byte[1024];
+
+				int bytesRead;
+
+				while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+
+					responseOutputStream.write(buffer, 0, bytesRead);
+
+				}
+
+				fileInputStream.close();
+
+				responseOutputStream.close();
+
+			} catch (IOException e) {
+
+				// Handle IO exception
+
+				e.printStackTrace();
+
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+
+			}
+
+		} else {
+
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+
+		}
+
+	}
+
+	// Utility method to determine content type based on filename
+
+	private String determineContentType2(String filename) {
+
+		if (filename.endsWith(".pdf")) {
+
+			return "application/pdf";
+
+		} else if (filename.endsWith(".jpg") || filename.endsWith(".jpeg")) {
+
+			return "image/jpeg";
+
+		} else if (filename.endsWith(".png")) {
+
+			return "image/png";
+
+		} else {
+
+			return "application/octet-stream"; // Default to binary data if content type is unknown
+
+		}
 
 	}
 

@@ -149,41 +149,46 @@ input[type="file"] {
 								<thead>
 									<tr>
 
+                                        <th>Mill name</th>
 										<th>Contract No.</th>
 										<th>Contract Date</th>
-										<th>Quantity</th>
+										<th>Contract Quantity</th>
+									    <th>Crop Year</th>
 										<th>Payment Due Date</th>
 										<th>Contract Value Online</th>
-										<th>Contract Value LC</th>
-										<!-- <th>Payment Due Date</th> -->
+										<th>Contract Value LC</th>								
 										<th>Upload Signed Doc</th>
-										<th>Action</th>
-
-
-
-
-
+										<th>Action</th>										
 									</tr>
-								</thead>
-								<tbody>
+								    </thead>
+								    <tbody>
 
 									<c:forEach items="${AllList}" var="item">
 
 
 										<tr>
+										    <td>${item.getMill_name()}</td>
 
 											<td>${item.getContract_no()}</td>
 											<td>${item.getContract_date()}</td>
 											<td>${item.getContract_qty()}</td>
+											 <td>${item.getCropYear()}</td>  
+											
+											 
+											
 											<td>${item. getPayment_duedate()}</td>
 											<td>${item.getContract_value()}</td>
+											<td></td>
+<%-- 											<td>  <a href="downloadSupportingDocumententrytds.obj?filename=${item.getAcceptance_doc_path()}" class="btn btn-primary" target="_blank"> View Document</a></button></td>	
+ --%> 										
+ 											<td>  <a href="downloadSupportingDocumententMillAccept.obj?filename=${item. getContract_acceptance_doc()}" class="btn btn-primary" target="_blank"> View Document</a></button></td>	
+ 
 
 
 
-											<%-- <td>${item. getPayment_duedate()}</td> --%>
 											<form action="saveMillAcceptenceFile.obj" method="POST"
 												enctype="multipart/form-data">
-												<td><c:choose>
+												<%-- <td><c:choose>
 														<c:when test="${item.getContract_value_lc() != 0.0}">
 															<div class="col-sm-10 form-group">
 																<input class="form-control taxtbox"
@@ -200,14 +205,14 @@ input[type="file"] {
 																	type="number" step="any">
 															</div>
 														</c:otherwise>
-													</c:choose></td>
-												<td>
+													</c:choose></td> --%>
+												<%-- <td>
 												<input  type="file" value="${item.getAcceptance_doc_path()}"										
 												name="Acceptance_doc_path" id="Acceptance_doc_path" >
 												<br> ${item.getAcceptance_doc_path()} 
 												
 																						
-												</td> 
+												</td>  --%>
 												<input type="hidden" value="${item.contract_id}"
 													name="contract_id" >
 												<td><c:choose>
