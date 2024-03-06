@@ -60,7 +60,7 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 	public List<JcicontractModel> getAll() {
 	    List<JcicontractModel> ll = new ArrayList<>();
 	    List<Object[]> rows = new ArrayList<>();
-	    String querystr = "select Contract_no, Contract_date, Contract_qty, Contract_value, Payment_duedate, Contract_acceptance_flag, contract_id,Delivery_type ,Mill_name, Contract_acceptance_doc, Acceptance_doc_path,CropYear   from jcicontract";
+	    String querystr = "select Contract_no, Contract_date, Contract_qty, Contract_value, Payment_duedate, Contract_acceptance_flag, contract_id,Delivery_type ,Mill_name, Contract_acceptance_doc, Acceptance_doc_path,CropYear,Jute_value, Intial_Payment_date from jcicontract";
 	  //  String querystr = "select Contract_no, Contract_date, Contract_qty, Contract_value, Payment_duedate, Contract_acceptance_flag, contract_id,Delivery_type ,Mill_name, Contract_acceptance_doc, Acceptance_doc_path  from jcicontract";
 	    
 	    Session session = sessionFactory.getCurrentSession();
@@ -83,7 +83,8 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 	       String Acceptance_doc_path= (String)row[10];
 	      //Double Contract_value_lc =(Double) row[11];
 	      String CropYear =(String)row[11];
-	        
+	      Double Jute_value =(Double)row[12];
+	        String Intial_Payment_date = (String)row[13];
 
 	        JcicontractModel cm = new JcicontractModel();
 	        cm.setContract_no(Contract_no);
@@ -99,6 +100,8 @@ public class MillAcceptDaoImpl implements millAcceptDao{
 	        cm.setAcceptance_doc_path(Acceptance_doc_path);
 	      //  cm.setContract_value_lc(Contract_value_lc);
 	        cm.setCropYear(CropYear);
+	        cm.setJute_value(Jute_value);
+	        cm.setIntial_Payment_date(Intial_Payment_date);
 	        
 
 	        ll.add(cm);

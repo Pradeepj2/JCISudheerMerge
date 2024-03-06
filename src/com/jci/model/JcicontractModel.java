@@ -89,6 +89,11 @@ public class JcicontractModel {
 	
     @Column(name = "CropYear")
     private String cropYear;
+    
+    @Column(name = "Jute_value")
+    private double Jute_value;
+
+
 
 	
 	
@@ -299,6 +304,16 @@ public class JcicontractModel {
 	public void setCropYear(String cropYear) {
 		this.cropYear = cropYear;
 	}
+	
+	
+
+	public double getJute_value() {
+		return Jute_value;
+	}
+
+	public void setJute_value(double jute_value) {
+		Jute_value = jute_value;
+	}
 
 	@Override
 	public String toString() {
@@ -313,12 +328,10 @@ public class JcicontractModel {
 				+ ", Contract_acceptance_doc=" + Contract_acceptance_doc + ", Intial_Payment_date="
 				+ Intial_Payment_date + ", Intial_Payment_flag=" + Intial_Payment_flag + ", Contract_status="
 				+ Contract_status + ", Created_date=" + Created_date + ", Created_by=" + Created_by + ", cropYear="
-				+ cropYear + ", Acceptance_doc_path=" + Acceptance_doc_path + "]";
+				+ cropYear + ", Jute_value=" + Jute_value + ", Acceptance_doc_path=" + Acceptance_doc_path + "]";
 	}
 
 	
-	
-
 	
 
 

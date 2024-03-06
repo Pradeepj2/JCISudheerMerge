@@ -11,8 +11,8 @@ public class EmailSender {
 			String username1) {
 
 		// String smtpHost = "smtp.office365.com";
-		//String smtpHost = "smtp.gmail.com";
-	String smtpHost = "smtpss.gmaillllll.com";
+		String smtpHost = "smtp.gmail.com";
+	//String smtpHost = "smtpss.gmaillllll.com";
 		int smtpPort = 587; // Use 587 for TLS or 465 for SSL
 
 		String username = "guptamansi7867@gmail.com";

@@ -152,12 +152,15 @@ input[type="file"] {
                                         <th>Mill name</th>
 										<th>Contract No.</th>
 										<th>Contract Date</th>
+										<th>Crop Year</th>
 										<th>Contract Quantity</th>
-									    <th>Crop Year</th>
+									    
+									    <th>Intially Payment Date</th>
 										<th>Payment Due Date</th>
-										<th>Contract Value Online</th>
-										<th>Contract Value LC</th>								
-										<th>Upload Signed Doc</th>
+										<th>Fibre Value</th>
+										<th>Contract Value (In Case of Non Lc)</th>
+										<th>Contract Value (In Case of LC)</th>								
+										<th>View Contract Document</th>
 										<th>Action</th>										
 									</tr>
 								    </thead>
@@ -171,16 +174,18 @@ input[type="file"] {
 
 											<td>${item.getContract_no()}</td>
 											<td>${item.getContract_date()}</td>
+											 <td>${item.getCropYear()}</td> 
 											<td>${item.getContract_qty()}</td>
-											 <td>${item.getCropYear()}</td>  
-											
 											 
 											
+											 <td>${item.getIntial_Payment_date()}</td>
+											<%-- <td>${getIntial_Payment_date()}</td> --%>
 											<td>${item. getPayment_duedate()}</td>
-											<td>${item.getContract_value()}</td>
-											<td></td>
-<%-- 											<td>  <a href="downloadSupportingDocumententrytds.obj?filename=${item.getAcceptance_doc_path()}" class="btn btn-primary" target="_blank"> View Document</a></button></td>	
- --%> 										
+											 <td>${item.getJute_value()}</td> 
+											
+											<td>${item.getJute_value()*1.05}</td>
+											<td>${item.getJute_value()*1.10}</td>
+										
  											<td>  <a href="downloadSupportingDocumententMillAccept.obj?filename=${item. getContract_acceptance_doc()}" class="btn btn-primary" target="_blank"> View Document</a></button></td>	
  
 
